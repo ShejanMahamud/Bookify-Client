@@ -6,12 +6,12 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyALAQmi1t6g7w5s5EuC8OrGlPw5Ipkhuvw",
-  authDomain: "bookify-library-client.firebaseapp.com",
-  projectId: "bookify-library-client",
-  storageBucket: "bookify-library-client.appspot.com",
-  messagingSenderId: "388380336028",
-  appId: "1:388380336028:web:8c182b8fbfce1c4f29f259"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
