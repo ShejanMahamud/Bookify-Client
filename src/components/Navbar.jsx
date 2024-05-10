@@ -34,7 +34,7 @@ const Navbar = () => {
   }
 
   return (
-<nav className='w-full flex items-center justify-between px-10 py-3 font-inter shadow-sm'>
+<nav className='w-full flex items-center justify-between px-10 py-3 font-inter shadow-md'>
     <div className='flex items-center gap-3'>
       <img src="https://i.ibb.co/mTw52Mh/library.png" alt="logo.svg" className='
       w-10'/>
@@ -59,10 +59,10 @@ const Navbar = () => {
                 ? "underline decoration-primary decoration-2 underline-offset-8"
                 : "no-underline"
             }
-            to={"/all_arts"}
+            to={"/all_books"}
           >
             <li className=" font-medium text-sm cursor-pointer">
-             All Arts
+             All Books
             </li>
           </NavLink>
           <NavLink
@@ -71,10 +71,10 @@ const Navbar = () => {
                 ? "underline decoration-primary decoration-2 underline-offset-8"
                 : "no-underline"
             }
-            to={"/add_arts"}
+            to={"/add_books"}
           >
             <li className=" font-medium text-sm cursor-pointer">
-              Add Arts
+              Add Books
             </li>
           </NavLink>
           <NavLink
@@ -83,10 +83,10 @@ const Navbar = () => {
                 ? "underline decoration-primary decoration-2 underline-offset-8"
                 : "no-underline"
             }
-            to={"/my_arts"}
+            to={"/borrowed_books"}
           >
             <li className=" font-medium text-sm cursor-pointer">
-              My Arts
+            Borrowed Books
             </li>
           </NavLink>
     </ul>

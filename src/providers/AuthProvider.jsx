@@ -44,23 +44,24 @@ const AuthProvider = ({ children }) => {
     })
   }
 
+  const logOut = () => {
+    return signOut(auth)
+  }
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth,async (currentUser) => {
       const email = currentUser?.email || user?.email;
       setUser(currentUser);
       setLoading(false);
       if(currentUser){
-        await axios.post(`${import.meta.env.VITE_SERVER_API}/jwt`,{email:email},{withCredentials:true})
+       const {data} = await axios.get(`${import.meta.env.VITE_SERVER_API}/user/${email}`,{withCredentials:true})
+        await axios.post(`${import.meta.env.VITE_SERVER_API}/jwt`,{email:email,role:data?.role},{withCredentials:true})
       }else{
-        await axios.get(`${import.meta.env.VITE_SERVER_API}/logout`,{withCredentials:true})
+        await axios.post(`${import.meta.env.VITE_SERVER_API}/logout`,{email:email},{withCredentials:true})
       }
     });
     return () => unSubscribe();
   }, [user]);
-
-  const logOut = () => {
-    return signOut(auth)
-  }
 
   const authInfo = { googleLogin,user,loading,logOut,emailPasswordRegister,updateUser,emailPasswordLogin,githubLogin,setUser };
 

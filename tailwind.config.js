@@ -11,7 +11,7 @@ export default {
         'briem-hand' : 'Briem Hand'
       },
       colors:{
-        "primary": "#FF7B54"
+        "primary": "#4169E1"
       },
       backgroundImage: {
         'banner-1': "linear-gradient(199deg, rgba(0, 0, 0, 0.00) 15.31%, rgba(0, 0, 0, 0.84) 67.37%), url('https://i.ibb.co/Tm41yNg/landing-slider-1.jpg')",
