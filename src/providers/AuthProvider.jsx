@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -14,6 +15,7 @@ import auth from "./../config/firebase.config";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -35,10 +37,6 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth,email,password)
   }
 
-  const logOut = () => {
-    return signOut(auth)
-  }
-
   const updateUser = (name,photo) => {
     return updateProfile(auth.currentUser,{
       displayName: name,
@@ -47,14 +45,24 @@ const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth,async (currentUser) => {
+      const email = currentUser?.email || user?.email;
       setUser(currentUser);
       setLoading(false);
+      if(currentUser){
+        await axios.post(`${import.meta.env.VITE_SERVER_API}/jwt`,{email:email},{withCredentials:true})
+      }else{
+        await axios.get(`${import.meta.env.VITE_SERVER_API}/logout`,{withCredentials:true})
+      }
     });
     return () => unSubscribe();
   }, [user]);
 
-  const authInfo = { googleLogin,user,loading,logOut,emailPasswordRegister,updateUser,emailPasswordLogin,githubLogin };
+  const logOut = () => {
+    return signOut(auth)
+  }
+
+  const authInfo = { googleLogin,user,loading,logOut,emailPasswordRegister,updateUser,emailPasswordLogin,githubLogin,setUser };
 
   return (
     <AuthContext.Provider value={authInfo}>
