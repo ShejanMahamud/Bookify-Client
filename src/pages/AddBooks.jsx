@@ -15,29 +15,37 @@ const AddBooks = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-  const handleAddBook = async (e) => {
-    e.preventDefault();
-
-    const book_name = e.target.name.value;
-    const book_description = e.target.description.value;
-    const book_photo = e.target.photo.value;
-    const book_category = e.target.category.value;
-    const book_author = e.target.author.value;
-    const book_rating = e.target.rating.value;
-    const book_quantity = e.target.quantity.value;
-    const book_about = e.target.about.value;
-
-    const book = {book_name,book_about,book_author,book_category,book_description,book_photo,book_rating,book_quantity}
+    const handleAddBook = async (e) => {
+      e.preventDefault();
     
-    const {data} = await axiosSecure.post('/books',book)
-    if(!data.success){
-       return toast.error('Only Librarian Can Add Book!')
+      const book_name = e.target.name.value;
+      const book_description = e.target.description.value;
+      const book_photo = e.target.photo.value;
+      const book_category = e.target.category.value;
+      const book_author = e.target.author.value;
+      const book_rating = e.target.rating.value;
+      const book_quantity = e.target.quantity.value;
+      const book_about = e.target.about.value;
+    
+      const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity }
+    
+      try {
+        const {data} = await axiosSecure.post('/books', book);
+
+        if (!data?.access) {
+          toast.error('Only Librarian Can Add Book!');
+          return; 
+        }
+        
+        if (data?.access && data?.res?.insertedId) {
+          toast.success('Successfully Added Book!');
+          e.target.reset();
+        }
+      } catch (error) {
+        toast.error('An error occurred while adding the book.');
+      }
     }
-    if(data.insertedId){
-        toast.success('Successfully Added Book!')
-        e.target.reset();
-    }
-}
+    
 
   return (
     <form
@@ -104,12 +112,12 @@ const AddBooks = () => {
             <option disabled selected className="text-gray-400">
               Category
             </option>
-            <option>Novel</option>
-            <option>Thriller</option>
-            <option>History</option>
-            <option>Drama</option>
-            <option> Sci-Fi</option>
-            <option>Romantic</option>
+            <option value='novel'>Novel</option>
+            <option value='thriller'>Thriller</option>
+            <option value='history'>History</option>
+            <option value='drama'>Drama</option>
+            <option value='islamic'>Islamic</option>
+            <option value='life'>Life</option>
           </select>
 
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">

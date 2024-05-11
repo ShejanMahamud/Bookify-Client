@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import {
   createBrowserRouter
@@ -8,6 +9,7 @@ import BorrowedBooks from '../pages/BorrowedBooks';
 import Error from '../pages/Error';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import UpdateBooks from '../pages/UpdateBook';
 import AllBooks from './../pages/AllBooks';
 import Home from './../pages/Home';
 import PrivateRoute from './PrivateRoute';
@@ -36,6 +38,11 @@ const Route = createBrowserRouter([
         {
           path: '/login',
           element: <Login/>
+        },
+        {
+          path: '/update_book/:id',
+          loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/book/${params.id}`),
+          element: <PrivateRoute><UpdateBooks/></PrivateRoute>
         },
         {
           path: '/register',
