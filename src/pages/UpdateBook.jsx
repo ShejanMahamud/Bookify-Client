@@ -43,6 +43,7 @@ const UpdateBooks = () => {
 
       if (!data?.access) {
         toast.error("Only Librarian Can Update Book!");
+        e.target.reset();
         return;
       }
 
