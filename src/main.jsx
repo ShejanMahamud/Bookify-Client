@@ -1,3 +1,4 @@
+import '@smastrom/react-rating/style.css';
 import {
   QueryClient,
   QueryClientProvider
@@ -10,7 +11,6 @@ import {
 import Route from './Route/Route.jsx';
 import './index.css';
 import AuthProvider from './providers/AuthProvider.jsx';
-
 
 const queryClient = new QueryClient()
 

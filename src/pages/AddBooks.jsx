@@ -7,7 +7,6 @@ import { IoIosArrowRoundBack, IoMdBook } from "react-icons/io";
 import { IoAnalytics, IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import { Tooltip } from "react-tooltip";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
@@ -23,8 +22,8 @@ const AddBooks = () => {
       const book_photo = e.target.photo.value;
       const book_category = e.target.category.value;
       const book_author = e.target.author.value;
-      const book_rating = e.target.rating.value;
-      const book_quantity = e.target.quantity.value;
+      const book_rating = parseInt(e.target.rating.value);
+      const book_quantity = parseInt(e.target.quantity.value);
       const book_about = e.target.about.value;
     
       const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity }
@@ -77,7 +76,7 @@ const AddBooks = () => {
               name="name"
               placeholder="* Book Name"
               required
-              className="focus:outline-none bg-transparent"
+              className="focus:outline-none bg-transparent w-full"
             />
             <IoMdBook className="text-primary text-xl opacity-70" />
           </label>
@@ -112,12 +111,12 @@ const AddBooks = () => {
             <option disabled selected className="text-gray-400">
               Category
             </option>
-            <option value='novel'>Novel</option>
-            <option value='thriller'>Thriller</option>
-            <option value='history'>History</option>
-            <option value='drama'>Drama</option>
-            <option value='islamic'>Islamic</option>
-            <option value='life'>Life</option>
+            <option value="Novel">Novel</option>
+            <option value="Thriller">Thriller</option>
+            <option value="History">History</option>
+            <option value="Drama">Drama</option>
+            <option value="Islamic">Islamic</option>
+            <option value="Careers">Careers</option>
           </select>
 
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">
@@ -171,8 +170,6 @@ const AddBooks = () => {
         <span>Add Book</span>
         <GoArrowRight className="text-2xl" />
       </button>
-      <Tooltip id="email" />
-      <Tooltip id="name" />
     </form>
   );
 };

@@ -5,6 +5,8 @@ import {
 } from "react-router-dom";
 import Root from '../layout/Root';
 import AddBooks from '../pages/AddBooks';
+import BookDetails from '../pages/BookDetails';
+import BooksByCategory from '../pages/BooksByCategory';
 import BorrowedBooks from '../pages/BorrowedBooks';
 import Error from '../pages/Error';
 import Login from '../pages/Login';
@@ -43,6 +45,16 @@ const Route = createBrowserRouter([
           path: '/update_book/:id',
           loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/book/${params.id}`),
           element: <PrivateRoute><UpdateBooks/></PrivateRoute>
+        },
+        {
+          path: '/books_category/:category',
+          loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/books_category/${params.category}`),
+          element: <BooksByCategory/>
+        },
+        {
+          path: '/book/:id',
+          loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/book/${params.id}`),
+          element: <BookDetails/>
         },
         {
           path: '/register',

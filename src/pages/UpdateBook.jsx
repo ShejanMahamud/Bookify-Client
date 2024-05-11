@@ -28,7 +28,7 @@ const UpdateBooks = () => {
     const book_photo = e.target.photo.value;
     const book_category = e.target.category.value;
     const book_author = e.target.author.value;
-    const book_rating = e.target.rating.value;
+    const book_rating = parseInt(e.target.rating.value);
 
     const book = {
       book_name,
@@ -67,12 +67,12 @@ const UpdateBooks = () => {
         <IoIosArrowRoundBack className="text-2xl" />
         <span className=" text-base font-medium">Back to home</span>
       </div>
-      <div className="flex flex-col items-start gap-2 w-[90%] mx-auto mb-10">
-        <h1 className="text-primary font-medium">Update Books</h1>
+      <div className="flex flex-col items-center justify-center gap-2 w-[90%] mx-auto mb-10">
+        <h1 className="text-primary font-medium">Update Book</h1>
         <span className=" font-bold lg:text-3xl md:text-xl text-lg">
-          {`Update ${book_name}`}
+          {`${book_name}`}
         </span>
-        <p className="text-[#737D8C] w-[60%] text-sm">
+        <p className="text-[#737D8C] text-sm">
           Add and manage books easily
         </p>
       </div>
@@ -86,7 +86,7 @@ const UpdateBooks = () => {
               defaultValue={book_name}
               placeholder="* Book Name"
               required
-              className="focus:outline-none bg-transparent"
+              className="focus:outline-none bg-transparent w-full"
             />
             <IoMdBook className="text-primary text-xl opacity-70" />
           </label>
@@ -111,12 +111,12 @@ const UpdateBooks = () => {
             <option disabled selected className="text-gray-400">
               Category
             </option>
-            <option value="novel">Novel</option>
-            <option value="thriller">Thriller</option>
-            <option value="history">History</option>
-            <option value="drama">Drama</option>
-            <option value="islamic">Islamic</option>
-            <option value="life">Life</option>
+            <option value="Novel">Novel</option>
+            <option value="Thriller">Thriller</option>
+            <option value="History">History</option>
+            <option value="Drama">Drama</option>
+            <option value="Islamic">Islamic</option>
+            <option value="Careers">Careers</option>
           </select>
 
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">
