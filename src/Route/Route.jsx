@@ -35,7 +35,7 @@ const Route = createBrowserRouter([
         },
         {
           path: '/borrowed_books',
-          element: <BorrowedBooks/>
+          element: <PrivateRoute><BorrowedBooks/></PrivateRoute>
         },
         {
           path: '/login',
@@ -53,7 +53,7 @@ const Route = createBrowserRouter([
         },
         {
           path: '/book/:id',
-          element: <BookDetails/>
+          element: <PrivateRoute><BookDetails/></PrivateRoute>
         },
         {
           path: '/register',

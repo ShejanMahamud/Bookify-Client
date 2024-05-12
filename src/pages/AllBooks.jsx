@@ -1,8 +1,6 @@
-import { HomeOutlined } from "@ant-design/icons";
-import { Breadcrumb, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { BiSolidCategory } from "react-icons/bi";
-import { IoBookOutline } from "react-icons/io5";
 import { MdTableRows } from "react-icons/md";
 import BookCard from "../Utils/BookCard";
 import BookListCard from "../Utils/BookListCard";
@@ -42,34 +40,23 @@ const AllBooks = () => {
 
   return (
     <div className="font-inter w-full">
-      <div className="bg-[#F1F2F4] py-10 flex flex-col items-center gap-5 w-full px-20">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 py-20">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Find Books</h1>
-            <span className=" font-bold lg:text-3xl md:text-xl text-lg">
+            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
               {`All Books `}
             </span>
-            <p className="text-[#737D8C] text-sm">
+            <p className=" text-sm text-white">
               Add and manage books easily
             </p>
           </div>
-          <Breadcrumb
-            items={[
-              {
-                href: "/",
-                title: <HomeOutlined />,
-              },
-              {
-                href: "",
-                title: (
-                  <div className="flex items-center gap-1">
-                    <IoBookOutline />
-                    <span>All Books</span>
-                  </div>
-                ),
-              },
-            ]}
-          />
+            <ul className="flex items-center gap-1 text-white text-sm">
+              <li>Home</li>
+              <li>/</li>
+              <li>All Books</li>
+            </ul>
+
         </div>
       </div>
       <div className="py-10 px-20">

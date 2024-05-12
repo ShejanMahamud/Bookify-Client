@@ -24,6 +24,8 @@ export default {
         'banner-7': "linear-gradient(199deg, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.50) 50%), url('https://i.ibb.co/5MxCMB2/images-q-tbn-ANd9-Gc-Q-lgn-Xh0-Ar-L3-Wdg-Eq-JR9-K17it-w8o-I6-Pwjr-Wn5qn-Ma2g-s.jpg')",
         'banner-8': "linear-gradient(199deg, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.50) 50%), url('https://i.ibb.co/dj363gs/The-best-history-books.jpg')",
         'banner-9': "linear-gradient(199deg, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.50) 50%), url('https://i.ibb.co/2Ym6KQC/1687810670-1687810670-goodreads-misc.png')",
+        'banner-10': "linear-gradient(199deg, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.60) 50%), url('https://i.ibb.co/gvgWRH3/devon-divine-Hzp-1ua8-DVE-unsplash.jpg')",
+        'banner-11': "linear-gradient(199deg, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.80) 50%), url('https://i.ibb.co/yhjpQPR/olena-bohovyk-Ft-Wn-K5-YH8-unsplash.jpg')",
      },
     },
   },

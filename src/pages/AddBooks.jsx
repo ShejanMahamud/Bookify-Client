@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { GoArrowRight } from "react-icons/go";
-import { IoIosArrowRoundBack, IoMdBook } from "react-icons/io";
+import { IoMdBook } from "react-icons/io";
 import { IoAnalytics, IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
@@ -50,23 +50,26 @@ const AddBooks = () => {
   return (
     <form
       onSubmit={handleAddBook}
-      className="w-full py-20 font-poppins flex items-center flex-col"
+      className="w-full font-poppins flex items-center flex-col"
     >
-      <div
-        onClick={() => navigate("/")}
-        className="flex items-center w-[90%] mx-auto mb-10 cursor-pointer"
-      >
-        <IoIosArrowRoundBack className="text-2xl" />
-        <span className=" text-base font-medium">Back to home</span>
-      </div>
-      <div className="flex flex-col items-start gap-2 w-[90%] mx-auto mb-10">
-        <h1 className="text-primary font-medium">Add Books</h1>
-        <span className=" font-bold lg:text-3xl md:text-xl text-lg">
-          Add book to Bookify
-        </span>
-        <p className="text-[#737D8C] w-[60%] text-sm">
-          Add and manage books easily
-        </p>
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-20 py-16">
+        <div className="flex items-center justify-between w-full ">
+          <div className="flex flex-col items-start gap-2">
+            <h1 className="text-primary font-medium">Add Books</h1>
+            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
+              {`Add Books in Library`}
+            </span>
+            <p className=" text-sm text-white">
+              Add and manage books easily
+            </p>
+          </div>
+            <ul className="flex items-center gap-1 text-white text-sm">
+              <li>Home</li>
+              <li>/</li>
+              <li>Add Book</li>
+            </ul>
+
+        </div>
       </div>
       <div className="w-[90%] mx-auto">
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center gap-x-10 gap-y-10 my-5 ">

@@ -1,8 +1,5 @@
-import { HomeOutlined } from "@ant-design/icons"
-import { Breadcrumb } from "antd"
 import React from 'react'
 import { BsBook } from "react-icons/bs"
-import { IoBookOutline } from "react-icons/io5"
 import useBorrowedBooks from "../hooks/useBorrowedBooks"
 import BorrowedBook from './../Utils/BorrowedBook'
 
@@ -19,34 +16,23 @@ if(isPending){
 
   return (
     <div className="font-inter w-full">
-      <div className="bg-[#F1F2F4] py-10 flex flex-col items-center gap-5 w-full px-20">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-20 py-16">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
-            <h1 className="text-primary font-medium">Find Books</h1>
-            <span className=" font-bold lg:text-3xl md:text-xl text-lg">
-              {`All Books `}
+            <h1 className="text-primary font-medium">Borrowed Books</h1>
+            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
+              {`All Borrowed Books `}
             </span>
-            <p className="text-[#737D8C] text-sm">
-              Add and manage books easily
+            <p className=" text-sm text-white">
+              Manage your borrowed books easily
             </p>
           </div>
-          <Breadcrumb
-            items={[
-              {
-                href: "/",
-                title: <HomeOutlined />,
-              },
-              {
-                href: "",
-                title: (
-                  <div className="flex items-center gap-1">
-                    <IoBookOutline />
-                    <span>All Books</span>
-                  </div>
-                ),
-              },
-            ]}
-          />
+            <ul className="flex items-center gap-1 text-white text-sm">
+              <li>Home</li>
+              <li>/</li>
+              <li>Borrowed Books</li>
+            </ul>
+
         </div>
       </div>
       <div className="py-10 px-20">

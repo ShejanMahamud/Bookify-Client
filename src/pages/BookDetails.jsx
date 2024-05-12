@@ -10,6 +10,7 @@ import { SlEnvolope } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import TiltCard from "../Utils/Tilt";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
@@ -27,14 +28,6 @@ const BookDetails = () => {
       return data;
     },
   });
-
-const {data:books_count} = useQuery({
-    queryKey: ['book_count'],
-    queryFn: async () => {
-      const {data:res} = await axiosSecure.get(`/books_count/${data?.author_email}`)
-      return res;
-    }
-  })
 
   const { mutateAsync } = useMutation({
     mutationFn: async ({ book_name, borrowedBooks }) => {
@@ -107,18 +100,35 @@ const {data:books_count} = useQuery({
           <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
         </div>
       ) : (
-        <div className="w-full my-28 font-inter">
+        <div className="w-full font-inter">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 py-16 mb-20">
+        <div className="flex items-center justify-between w-full ">
+          <div className="flex flex-col items-start gap-2">
+            <h1 className="text-primary font-medium">Book Details</h1>
+            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
+              {`Detail About Book `}
+            </span>
+            <p className=" text-sm text-white">
+              Know more about your favorite one
+            </p>
+          </div>
+            <ul className="flex items-center gap-1 text-white text-sm">
+              <li>Home</li>
+              <li>/</li>
+              <li>{data?.book_category} Books</li>
+              <li>/</li>
+              <li>{data?.book_name}</li>
+            </ul>
+
+        </div>
+      </div>
           <div className="w-[90%] mx-auto grid grid-cols-2 row-auto items-start gap-20">
-            <div className="w-full bg-[#E5E5E5] rounded-lg px-10 py-10 flex items-center justify-center relative">
+            <div className="w-full bg-banner-11 bg-no-repeat bg-center bg-cover  rounded-lg px-10 py-10 flex items-center justify-center relative group">
               <button className="flex items-center gap-3 bg-primary text-white px-2 py-2 rounded-md absolute top-0 right-0 text-sm">
                 <IoBookOutline />
                 <span>Read Book</span>
               </button>
-              <img
-                src={data?.book_photo}
-                alt="book-image.png"
-                className="w-80 rounded-lg"
-              />
+              <TiltCard image={data?.book_photo}/>
             </div>
             <div className="flex flex-col items-start gap-5 w-full">
               <div className="flex items-center gap-3">
@@ -245,12 +255,12 @@ const {data:books_count} = useQuery({
             </div>
           </div>
           <div className="w-[90%] mx-auto my-20">
-            <h1 className="font-medium text-3xl mb-5">Art Details</h1>
+            <h1 className="font-medium text-3xl mb-5">Book Details</h1>
             <Tabs selectedTabClassName="react-tabs__tab--selected">
               <TabList>
                 <Tab>Details</Tab>
                 <Tab>Description</Tab>
-                <Tab>Author</Tab>
+                <Tab>About</Tab>
               </TabList>
 
               <TabPanel>
@@ -279,20 +289,7 @@ const {data:books_count} = useQuery({
                 <p className="my-5">{data?.book_description}</p>
               </TabPanel>
               <TabPanel>
-                <div className="flex items-center gap-5 my-10 lg:flex-row md:flex-row flex-col">
-                  <div className="flex flex-col items-center gap-3">
-                    <img
-                      src="https://i.ibb.co/Lxvz266/user-1.png"
-                      alt="user.png"
-                      className="h-40 w-40 rounded-full border-2 border-primary"
-                    />
-                    <p className="font-medium">{books_count?.books_count} Arts</p>
-                  </div>
-                  <div className="flex flex-col lg:items-start md:items-start items-center gap-2">
-                    <p className="font-medium">hi</p>
-                    <p>hi</p>
-                  </div>
-                </div>
+                <p className="my-5">{data?.book_about}</p>
               </TabPanel>
             </Tabs>
           </div>
