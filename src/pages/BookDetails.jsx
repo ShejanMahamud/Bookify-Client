@@ -10,7 +10,7 @@ import { SlEnvolope } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import TiltCard from "../Utils/Tilt";
+import TiltCard from "../Utils/TiltCard";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
@@ -123,12 +123,12 @@ const BookDetails = () => {
         </div>
       </div>
           <div className="w-[90%] mx-auto grid grid-cols-2 row-auto items-start gap-20">
-            <div className="w-full bg-banner-11 bg-no-repeat bg-center bg-cover  rounded-lg px-10 py-10 flex items-center justify-center relative group">
+            <div className="w-full h-full bg-banner-11 bg-no-repeat bg-center bg-cover  rounded-lg px-10 py-10 flex items-center justify-center relative group">
               <button className="flex items-center gap-3 bg-primary text-white px-2 py-2 rounded-md absolute top-0 right-0 text-sm">
                 <IoBookOutline />
                 <span>Read Book</span>
               </button>
-              <TiltCard image={data?.book_photo}/>
+              <TiltCard image={data.book_photo} width={'300px'} height={'450px'}/>
             </div>
             <div className="flex flex-col items-start gap-5 w-full">
               <div className="flex items-center gap-3">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TiltCard = ({ image }) => {
+const TiltCard = ({ image,height,width }) => {
   const handleMove = (e) => {
     const el = document.getElementById("tilt");
     const height = el.clientHeight;
@@ -25,17 +25,17 @@ const TiltCard = ({ image }) => {
       onMouseOut={handleMouseOut}
       style={{
         display: "block",
-        height: "450px",
-        width: "300px",
+        height:height,
+        width: width,
         backgroundColor: "grey",
         margin: "0 auto",
         transition: "box-shadow 0.1s, transform 0.1s",
         backgroundImage: `url(${image})`,
-        backgroundSize: "100%",
+        backgroundSize: "cover",
+        backgroundPosition: 'center',
         backgroundRepeat: "no-repeat",
         cursor: "pointer",
         borderRadius: "12px",
-        backdropFilter: "blur(20px)",
       }}
     />
   );
