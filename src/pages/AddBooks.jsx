@@ -25,8 +25,9 @@ const AddBooks = () => {
       const book_rating = parseInt(e.target.rating.value);
       const book_quantity = parseInt(e.target.quantity.value);
       const book_about = e.target.about.value;
+      const author_email = user?.email;
     
-      const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity }
+      const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity,author_email }
     
       try {
         const {data} = await axiosSecure.post('/books', book);

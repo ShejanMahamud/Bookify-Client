@@ -91,7 +91,7 @@ const Register = () => {
         <div className="flex items-center gap-5 w-full justify-center">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "bg-[#FF7B5433] text-primary" : "no-underline"
+              isActive ? "bg-[#4169E133] text-primary" : "no-underline"
             }
             to={"/login"}
           >
@@ -101,7 +101,7 @@ const Register = () => {
           </NavLink>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "bg-[#FF7B5433] text-primary" : "no-underline"
+              isActive ? "bg-[#4169E133] text-primary" : "no-underline"
             }
             to={"/register"}
           >
@@ -122,7 +122,7 @@ const Register = () => {
               required
               name="name"
               placeholder="Enter Name"
-              class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="w-full mt-6">
@@ -133,13 +133,13 @@ const Register = () => {
               type="email"
               required
               name="email"
-              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-orange-400 focus:ring-orange-300  focus:outline-none focus:ring focus:ring-opacity-40"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Enter Email Address"
             />
           </div>
           <div className="mt-6">
             <label class="block mb-2 text-sm text-gray-600  ">Password</label>
-            <div className="flex items-center justify-between w-full px-5 py-3 mt-2 bg-white border rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:ring focus:ring-opacity-40">
+            <div className="flex items-center justify-between w-full px-5 py-3 mt-2 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:ring focus:ring-opacity-40">
               <input
                 name="password"
                 required
@@ -167,7 +167,7 @@ const Register = () => {
               required
               name="photo"
               placeholder="Photo URL"
-              class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-orange-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <div className="flex items-center gap-3 mt-6">

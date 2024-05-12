@@ -1,26 +1,44 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb, Tooltip } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { IoBookOutline } from "react-icons/io5";
 import { MdTableRows } from "react-icons/md";
 import BookCard from "../Utils/BookCard";
 import BookListCard from "../Utils/BookListCard";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllBooks = () => {
-  const [books, setBooks] = useState([]);
   const [showList, setShowList] = useState(false);
+  const axiosSecure = useAxiosSecure();
+  const [books, setBooks] = useState([]);
+  const [isPending,setIsPending] = useState(true)
 
-  useEffect(() => {
+  useEffect(()=>{
     const getBooks = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_SERVER_API}/books`
-      );
+      const {data} = await axiosSecure.get('/books')
       setBooks(data);
-    };
-    getBooks();
-  }, []);
+      setTimeout(()=>{
+        setIsPending(false)
+      },1000)
+    }
+    getBooks()
+  },[])
+
+  const handleAvailableBook = async () => {
+    setIsPending(true)
+    const {data} = await axiosSecure.get('/available_books');
+    setBooks(data)
+    setIsPending(false)
+  }
+
+  if(isPending){
+    return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+  </div>
+  }
 
   return (
     <div className="font-inter w-full">
@@ -57,43 +75,7 @@ const AllBooks = () => {
       <div className="py-10 px-20">
         <div className="flex w-full items-center justify-end">
           <div className="flex items-center gap-5">
-            <div className="flex items-center px-5 py-3 gap-3 rounded-lg border border-[#E4E5E8]">
-              <span className="text-xs">Items Per Page</span>
-              <select
-                // defaultValue={itemsPerPage}
-                //  onChange={handleItemsPerPage}
-                name="page"
-                className="text-sm focus:outline-none"
-              >
-                <option value="5" selected>
-                  5
-                </option>
-                <option value="10" selected>
-                  10
-                </option>
-                <option value="15" selected>
-                  15
-                </option>
-                <option value="20" selected>
-                  20
-                </option>
-              </select>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-              >
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="#9199A3"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
+<button onClick={handleAvailableBook} className="px-4 py-2 rounded-md bg-primary text-white font-medium">Show Available Book</button>
             <div className="border border-[#E4E5E8] px-5 py-2 rounded-lg flex items-center gap-5">
               <Tooltip title="Grid View">
               <button

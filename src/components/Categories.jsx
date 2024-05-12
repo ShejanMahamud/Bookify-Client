@@ -14,7 +14,7 @@ const navigate = useNavigate();
       <div className="flex flex-col items-center justify-center gap-2 w-[90%] mx-auto mb-16">
         <h1 className="text-primary font-medium">Books Category</h1>
         <span className=" font-bold lg:text-3xl md:text-xl text-lg">
-          Browse Books By Category
+          Browse Books Category
         </span>
         <p className="text-[#737D8C] text-sm">
 

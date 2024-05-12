@@ -83,7 +83,7 @@ const handleEmailPasswordLogin = async (e) => {
             <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#FF7B5433] text-primary"
+                ? "bg-[#4169E133] text-primary"
                 : "no-underline"
             }
             to={"/login"}
@@ -95,7 +95,7 @@ const handleEmailPasswordLogin = async (e) => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "bg-[#FF7B5433] text-primary"
+                ? "bg-[#4169E133] text-primary"
                 : "no-underline"
             }
             to={"/register"}
@@ -124,12 +124,12 @@ const handleEmailPasswordLogin = async (e) => {
             <form onSubmit={handleEmailPasswordLogin} className='mt-6 w-full'>
             <div className='w-full'>
             <label for="email" class="block text-sm text-gray-800 ">Email Address</label>
-            <input type="email" required name="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-orange-400 focus:ring-orange-300  focus:outline-none focus:ring focus:ring-opacity-40" />
+            <input type="email" required name="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>
             <div class="mt-4">
             <label for="password" class="block text-sm text-gray-800 ">Password</label>
 
-            <input type="password" name="password" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg  focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+            <input type="password" name="password" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg  focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>
         <div className="flex items-center gap-3 mt-6">
               <input

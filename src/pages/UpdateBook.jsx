@@ -19,6 +19,7 @@ const UpdateBooks = () => {
     book_photo,
     book_rating,
     _id,
+    book_quantity
   } = data;
   const axiosSecure = useAxiosSecure();
   const handleUpdateBook = async (e) => {
@@ -36,6 +37,7 @@ const UpdateBooks = () => {
       book_category,
       book_photo,
       book_rating,
+      book_quantity
     };
 
     try {
@@ -61,11 +63,11 @@ const UpdateBooks = () => {
       className="w-full py-20 font-poppins flex items-center flex-col"
     >
       <div
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/all_books")}
         className="flex items-center w-[90%] mx-auto mb-10 cursor-pointer"
       >
         <IoIosArrowRoundBack className="text-2xl" />
-        <span className=" text-base font-medium">Back to home</span>
+        <span className=" text-base font-medium">Back To All Books</span>
       </div>
       <div className="flex flex-col items-center justify-center gap-2 w-[90%] mx-auto mb-10">
         <h1 className="text-primary font-medium">Update Book</h1>
@@ -121,7 +123,7 @@ const UpdateBooks = () => {
 
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">
             <input
-              type="number"
+              type="text"
               class="grow"
               name="rating"
               defaultValue={book_rating}

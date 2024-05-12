@@ -1,148 +1,304 @@
+import { Rating } from "@smastrom/react-rating";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { DatePicker, Modal, Tooltip } from "antd";
+import moment from "moment";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { LuUser2 } from "react-icons/lu";
+import { IoBookOutline } from "react-icons/io5";
+import { LuTag, LuUser2 } from "react-icons/lu";
 import { SlEnvolope } from "react-icons/sl";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const BookDetails = () => {
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const { data:book } = useLoaderData();
-const axiosSecure = useAxiosSecure();
-  const {
-    book_name,
-    book_photo,
-    book_author,
-    book_rating,
-    book_description,
-    book_category,
-    _id
-  } = book;
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
 
-  const {user} = useAuth();
+  const { data, refetch, isPending } = useQuery({
+    queryKey: ["book", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/book/${id}`);
+      return data;
+    },
+  });
+
+const {data:books_count} = useQuery({
+    queryKey: ['book_count'],
+    queryFn: async () => {
+      const {data:res} = await axiosSecure.get(`/books_count/${data?.author_email}`)
+      return res;
+    }
+  })
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ book_name, borrowedBooks }) => {
+      try {
+        const { data } = await axiosSecure.post(
+          `/borrowed_book/${book_name}`,
+          borrowedBooks
+        );
+        if (!data.success) {
+          return toast.error("You Already Borrowed This Book!");
+        }
+        if (data.success && data?.res?.insertedId) {
+          toast.success("Successful Borrowed Book!");
+          setOpen(false);
+          setConfirmLoading(true);
+          setTimeout(() => {
+            setOpen(false);
+            setConfirmLoading(false);
+          }, 2000);
+        }
+      } catch (error) {
+        toast.error("Something Went Wrong!");
+      }
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const handleBorrowBook = async (e) => {
+    e.preventDefault();
+    const return_date = e.target.date.value;
+    const borrowed_date = moment().format("YYYY-MM-DD");
+    const user_name = user?.displayName;
+    const user_email = user?.email;
+    const {
+      book_name,
+      book_photo,
+      book_author,
+      book_rating,
+      book_description,
+      book_category,
+      _id,
+    } = data;
+    const borrowedBooks = {
+      user_name,
+      user_email,
+      return_date,
+      borrowed_date,
+      book_name,
+      book_photo,
+      book_author,
+      book_rating,
+      book_description,
+      book_category,
+    };
+    await mutateAsync({ book_name, borrowedBooks });
+  };
 
   const showModal = () => {
     setOpen(true);
   };
 
-  const handleBorrowBook = async (e) => {
-    e.preventDefault();
-    const date = e.target.date.value;
-    const user_name = user?.displayName;
-    const user_email = user?.email;
-    const borrowedBooks = {user_name,user_email,date,book_name,book_photo,book_author,book_rating,book_description,book_category}
-    try{
-        const {data} = await axiosSecure.post(`/borrowed_books/${_id}`,borrowedBooks)
-        if(!data.success){
-           return toast.error('Book Not In Stock!')
-        }
-        if(data.success && data?.res?.insertedId){
-            toast.success('Successful Borrowed Book!');
-            setOpen(false)
-            setConfirmLoading(true);
-            setTimeout(() => {
-              setOpen(false);
-              setConfirmLoading(false);
-            }, 2000);
-        }
-    }
-    catch(error){
-        toast.error('Something Went Wrong!')
-    }
-  };
-
   return (
-    <div className="w-full my-28 font-inter">
-      <button
-        onClick={showModal}
-        className="bg-primary text-white text-lg font-medium px-4 py-2 rounded-md"
-      >
-        Borrow Book
-      </button>
-      <Modal open={open} confirmLoading={confirmLoading} onCancel={()=>setOpen(false)} footer={null}>
-        <h1 className="text-2xl font-medium mb-5">{`Borrow ${book_name}`}</h1>
-        <form
-          onSubmit={(e) => handleBorrowBook(e)}
-          className="w-full flex flex-col items-start gap-3"
-        >
-          <div className="mt-3 w-full">
-            <label
-              for="date"
-              class="block text-sm text-gray-800 mb-2 font-medium"
-            >
-              Return Date
-            </label>
-            <DatePicker
-              name="date"
-              format="YYYY-MM-DD"
-              className="w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80"
-            />
-          </div>
-    <Tooltip title="You Can't Change Name">
-    <div className="mt-3 w-full">
-            <label
-              for="name"
-              class="block text-sm text-gray-800 mb-2 font-medium"
-            >
-              User Name
-            </label>
-
-            <div className="flex items-center justify-between w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80 px-3">
-              <input
-                type="text"
-                class="grow"
-                name="name"
-                placeholder="User Name"
-                disabled
-                defaultValue={user?.displayName}
-                required
-                className="focus:outline-none bg-transparent w-full"
+    <>
+      {isPending ? (
+        <div className="w-full min-h-screen flex items-center justify-center space-x-2">
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+          <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+        </div>
+      ) : (
+        <div className="w-full my-28 font-inter">
+          <div className="w-[90%] mx-auto grid grid-cols-2 row-auto items-start gap-20">
+            <div className="w-full bg-[#E5E5E5] rounded-lg px-10 py-10 flex items-center justify-center relative">
+              <button className="flex items-center gap-3 bg-primary text-white px-2 py-2 rounded-md absolute top-0 right-0 text-sm">
+                <IoBookOutline />
+                <span>Read Book</span>
+              </button>
+              <img
+                src={data?.book_photo}
+                alt="book-image.png"
+                className="w-80 rounded-lg"
               />
-              <LuUser2 className="text-primary text-xl opacity-70" />
+            </div>
+            <div className="flex flex-col items-start gap-5 w-full">
+              <div className="flex items-center gap-3">
+                <button className="bg-primary text-white text-xs px-2 py-1 rounded-md">
+                  #{data?.book_category}
+                </button>
+                <button className="bg-primary text-white text-xs px-2 py-1 rounded-md">
+                  # No Charge
+                </button>
+              </div>
+              <h1 className="text-2xl font-medium">{data?.book_name}</h1>
+              <p className="text-primary text-sm font-medium">
+                {data?.book_author}
+              </p>
+              <div className="flex items-center gap-1">
+                <LuTag className="text-lg" />
+                <span className="text-base font-medium">
+                  {data?.book_category}
+                </span>
+              </div>
+
+              <p className="text-red-500 text-sm font-medium">
+                Stock Left: {data?.book_quantity}
+              </p>
+              <p>{data?.book_about}</p>
+              <p>{data?.book_description}</p>
+              <Rating
+                style={{ maxWidth: 120 }}
+                value={data?.book_rating}
+                readOnly
+              />
+
+              <button
+                disabled={data?.book_quantity === 0 && "true"}
+                onClick={showModal}
+                className="bg-primary text-white text-base font-medium px-4 py-2 rounded-md"
+              >
+                Borrow Book
+              </button>
+
+              <Modal
+                open={open}
+                confirmLoading={confirmLoading}
+                onCancel={() => setOpen(false)}
+                footer={null}
+              >
+                <h1 className="text-2xl font-medium mb-5">{`Borrow ${data?.book_name}`}</h1>
+                <form
+                  onSubmit={(e) => handleBorrowBook(e)}
+                  className="w-full flex flex-col items-start gap-3"
+                >
+                  <div className="mt-3 w-full">
+                    <label
+                      for="date"
+                      class="block text-sm text-gray-800 mb-2 font-medium"
+                    >
+                      Return Date
+                    </label>
+                    <DatePicker
+                      name="date"
+                      format="YYYY-MM-DD"
+                      className="w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80"
+                    />
+                  </div>
+                  <Tooltip title="You Can't Change Name">
+                    <div className="mt-3 w-full">
+                      <label
+                        for="name"
+                        class="block text-sm text-gray-800 mb-2 font-medium"
+                      >
+                        User Name
+                      </label>
+
+                      <div className="flex items-center justify-between w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80 px-3">
+                        <input
+                          type="text"
+                          class="grow"
+                          name="name"
+                          placeholder="User Name"
+                          disabled
+                          defaultValue={user?.displayName}
+                          required
+                          className="focus:outline-none bg-transparent w-full"
+                        />
+                        <LuUser2 className="text-primary text-xl opacity-70" />
+                      </div>
+                    </div>
+                  </Tooltip>
+                  <Tooltip title="You Can't Change Email">
+                    <div className="mt-3 w-full">
+                      <label
+                        for="email"
+                        class="block text-sm text-gray-800 mb-2 font-medium"
+                      >
+                        User Email
+                      </label>
+
+                      <div className="flex items-center justify-between w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80 px-3">
+                        <input
+                          type="text"
+                          class="grow"
+                          name="email"
+                          placeholder="User Email"
+                          required
+                          disabled
+                          defaultValue={user?.email}
+                          className="focus:outline-none bg-transparent w-full"
+                        />
+                        <SlEnvolope className="text-primary text-xl opacity-70" />
+                      </div>
+                    </div>
+                  </Tooltip>
+                  <button
+                    className="mt-3 w-full bg-primary text-white font-medium text-lg py-2 rounded-md flex items-center justify-center gap-2"
+                    type="submit"
+                  >
+                    {confirmLoading && (
+                      <div className="w-4 h-4 border-2 border-dashed rounded-full animate-spin  border-white dark:border-white"></div>
+                    )}
+                    <span>Borrow</span>
+                  </button>
+                </form>
+              </Modal>
             </div>
           </div>
-    </Tooltip>
-          <Tooltip title="You Can't Change Email">
-          <div className="mt-3 w-full">
-            <label
-              for="email"
-              class="block text-sm text-gray-800 mb-2 font-medium"
-            >
-              User Email
-            </label>
+          <div className="w-[90%] mx-auto my-20">
+            <h1 className="font-medium text-3xl mb-5">Art Details</h1>
+            <Tabs selectedTabClassName="react-tabs__tab--selected">
+              <TabList>
+                <Tab>Details</Tab>
+                <Tab>Description</Tab>
+                <Tab>Author</Tab>
+              </TabList>
 
-
-<div className="flex items-center justify-between w-full py-2 rounded-lg border border-primary border-opacity-50 focus:border-opacity-80 px-3">
-              <input
-                type="text"
-                class="grow"
-                name="email"
-                placeholder="User Email"
-                required
-                disabled
-                defaultValue={user?.email}
-                className="focus:outline-none bg-transparent w-full"
-              />
-              <SlEnvolope className="text-primary text-xl opacity-70" />
-            </div>
-
+              <TabPanel>
+                <table className="table w-full my-5">
+                  <tbody>
+                    <tr className="hover">
+                      <td className="font-medium">Title</td>{" "}
+                      <td>{data?.book_name}</td>
+                    </tr>
+                    <tr className="hover">
+                      <td className="font-medium">Rating</td>{" "}
+                      <td>{data?.book_rating}</td>
+                    </tr>
+                    <tr className="hover">
+                      <td className="font-medium">Category</td>{" "}
+                      <td>{data?.book_category}</td>
+                    </tr>
+                    <tr className="hover">
+                      <td className="font-medium">Stock</td>{" "}
+                      <td>{data?.book_quantity}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </TabPanel>
+              <TabPanel>
+                <p className="my-5">{data?.book_description}</p>
+              </TabPanel>
+              <TabPanel>
+                <div className="flex items-center gap-5 my-10 lg:flex-row md:flex-row flex-col">
+                  <div className="flex flex-col items-center gap-3">
+                    <img
+                      src="https://i.ibb.co/Lxvz266/user-1.png"
+                      alt="user.png"
+                      className="h-40 w-40 rounded-full border-2 border-primary"
+                    />
+                    <p className="font-medium">{books_count?.books_count} Arts</p>
+                  </div>
+                  <div className="flex flex-col lg:items-start md:items-start items-center gap-2">
+                    <p className="font-medium">hi</p>
+                    <p>hi</p>
+                  </div>
+                </div>
+              </TabPanel>
+            </Tabs>
           </div>
-          </Tooltip>
-          <button
-            className="mt-3 w-full bg-primary text-white font-medium text-lg py-2 rounded-md flex items-center justify-center gap-2"
-            type="submit"
-          >
-            {confirmLoading && (
-              <div className="w-4 h-4 border-2 border-dashed rounded-full animate-spin  border-white dark:border-white"></div>
-            )}
-            <span>Borrow</span>
-          </button>
-        </form>
-      </Modal>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

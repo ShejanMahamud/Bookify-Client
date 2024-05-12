@@ -53,7 +53,6 @@ const Route = createBrowserRouter([
         },
         {
           path: '/book/:id',
-          loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/book/${params.id}`),
           element: <BookDetails/>
         },
         {
