@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
@@ -12,6 +12,8 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 const UpdateBooks = () => {
   const navigate = useNavigate();
   const { data } = useLoaderData();
+  const axiosSecure = useAxiosSecure();
+
   const {
     book_name,
     book_author,
@@ -21,7 +23,7 @@ const UpdateBooks = () => {
     _id,
     book_quantity
   } = data;
-  const axiosSecure = useAxiosSecure();
+
   const handleUpdateBook = async (e) => {
     e.preventDefault();
 
@@ -56,6 +58,16 @@ const UpdateBooks = () => {
       toast.error("An error occurred while adding the book.");
     }
   };
+
+  useEffect(()=>{
+    const handleNavigate = async () => {
+      const {data} = await axiosSecure.get('/user_role')
+      if(!data.access){
+        return navigate(`/login`)
+      }
+    }
+    handleNavigate()
+  },[])
 
   return (
     <form

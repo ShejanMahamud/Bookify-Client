@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
@@ -46,6 +46,16 @@ const AddBooks = () => {
       }
     }
     
+
+useEffect(()=>{
+  const handleNavigate = async () => {
+    const {data} = await axiosSecure.get('/user_role')
+    if(!data.access){
+      return navigate(`/`)
+    }
+  }
+  handleNavigate()
+},[])
 
   return (
     <form

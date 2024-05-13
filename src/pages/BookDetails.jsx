@@ -33,7 +33,7 @@ const BookDetails = () => {
     mutationFn: async ({ book_name, borrowedBooks }) => {
       try {
         const { data } = await axiosSecure.post(
-          `/borrowed_book/${book_name}`,
+          `/borrowed_book/${book_name}/${user?.email}`,
           borrowedBooks
         );
         if (!data.success) {

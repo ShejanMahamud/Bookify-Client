@@ -3,6 +3,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { GoArrowRight } from 'react-icons/go';
 import { LuTag } from 'react-icons/lu';
+import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useBorrowedBooks from '../hooks/useBorrowedBooks';
 
@@ -13,16 +14,34 @@ const {refetch} = useBorrowedBooks();
 
 const handleReturnBook = async (id) => {
   try{
-    const {data} = await axiosSecure.delete(`/borrowed_book/${id}/${book_name}`);
-    if(data.deletedCount > 0){
-      toast.success('Deleted Successfully!');
-      refetch();
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, return it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const {data} = await axiosSecure.delete(`/borrowed_book/${id}/${book_name}`);
+        if(data.deletedCount > 0){
+          Swal.fire({
+            title: "Returned!",
+            text: "Book has been returned.",
+            icon: "success"
+          });
+          refetch();
+        }
+      }
+    });
+    
   }
   catch(error){
     toast.error('Something Went Wrong!')
   }
 }
+
 
   return (
     <div className='flex items-end gap-8 w-full rounded-md px-5 py-5'>
