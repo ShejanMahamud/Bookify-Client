@@ -2,7 +2,7 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
-import { IoIosArrowRoundBack, IoMdBook } from "react-icons/io";
+import { IoMdBook } from "react-icons/io";
 import { IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { useLoaderData, useNavigate } from "react-router-dom";
@@ -60,23 +60,28 @@ const UpdateBooks = () => {
   return (
     <form
       onSubmit={handleUpdateBook}
-      className="w-full py-20 font-poppins flex items-center flex-col"
+      className="w-full font-poppins flex items-center flex-col"
     >
-      <div
-        onClick={() => navigate("/all_books")}
-        className="flex items-center w-[90%] mx-auto mb-10 cursor-pointer"
-      >
-        <IoIosArrowRoundBack className="text-2xl" />
-        <span className=" text-base font-medium">Back To All Books</span>
-      </div>
-      <div className="flex flex-col items-center justify-center gap-2 w-[90%] mx-auto mb-10">
-        <h1 className="text-primary font-medium">Update Book</h1>
-        <span className=" font-bold lg:text-3xl md:text-xl text-lg">
-          {`${book_name}`}
-        </span>
-        <p className="text-[#737D8C] text-sm">
-          Add and manage books easily
-        </p>
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-20 py-16">
+        <div className="flex items-center justify-between w-full ">
+          <div className="flex flex-col items-start gap-2">
+            <h1 className="text-primary font-medium">Update Book</h1>
+            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
+              {`Update Book in Library`}
+            </span>
+            <p className=" text-sm text-white">
+              Update correct information of books
+            </p>
+          </div>
+            <ul className="flex items-center gap-1 text-white text-sm">
+              <li>Home</li>
+              <li>/</li>
+              <li>Update Book</li>
+              <li>/</li>
+              <li>{book_name}</li>
+            </ul>
+
+        </div>
       </div>
       <div className="w-[90%] mx-auto">
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center gap-x-10 gap-y-10 my-5 ">

@@ -27,7 +27,7 @@ const TiltCard = ({ image,height,width }) => {
         display: "block",
         height:height,
         width: width,
-        backgroundColor: "grey",
+        // backgroundColor: "grey",
         margin: "0 auto",
         transition: "box-shadow 0.1s, transform 0.1s",
         backgroundImage: `url(${image})`,

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import "swiper/css";
 import "swiper/css/navigation";
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
+import TiltCard from './../Utils/TiltCard';
 
 const Banner = () => {
   return (
@@ -16,43 +16,65 @@ const Banner = () => {
         className="mySwiper"
       >
       <SwiperSlide>
-        <div className="bg-banner-1 bg-cover bg-no-repeat bg-right w-full lg:h-[600px]  md:h-[600px] h-[700px] flex  flex-col justify-center lg:px-20 px-10 pt-10 items-start">
-          <h1 className="lg:text-6xl md:text-4xl text-4xl font-bold text-white lg:w-[60%] md:w-[60%] w-[90%] my-5 font-clickerScript">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+<div>
+<h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
             Find Your Best Friend
           </h1>
-          <p className="text-white opacity-80 lg:w-[40%] md:w-[40%] w-[90%] mb-10 lg:text-base md:text-base font-poppins text-sm">
+          <p className=" opacity-80  mb-10 lg:text-base md:text-base font-poppins text-sm">
           "We offer the most comprehensive collection of books from various genres, ranging from fiction to non-fiction, to cater to the reading preferences of all ages"
           </p>
-          <div className='flex items-center gap-5 bg-white rounded-lg px-2 py-2'>
+          <div className='flex items-center gap-5 rounded-lg px-2 py-2 border border-gray-500 border-opacity-30 w-[90%]'>
           <input type="text" className='bg-transparent focus:outline-none w-full py-2 px-5' placeholder='Write Book Name'/>
-          <button className='bg-primary text-white text-lg font-medium px-4 py-2 rounded-lg'>Search</button>
+          <button className='bg-primary  text-lg font-medium px-4 py-2 rounded-lg text-white'>Search</button>
           </div>
+</div>
+<div className='w-full'>
+  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
+  <TiltCard image={'https://i.ibb.co/9yR84Pd/Animation.png'} height={'450px'} width={'500px'}/>
+</div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-banner-2 bg-cover bg-no-repeat bg-center w-full lg:h-[600px]  md:h-[600px] h-[700px] flex  flex-col justify-center lg:px-20 px-10 pt-10 items-start">
-          <h1 className="lg:text-6xl md:text-4xl text-4xl font-bold lg:w-[40%] md:w-[60%] w-[90%] my-5 font-clickerScript text-white">
-            Oil Painting Art Collections
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+<div>
+<h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
+New Releases This Week
           </h1>
-          <p className=" opacity-80 lg:w-[40%] md:w-[40%] w-[90%] mb-10 text-white lg:text-base md:text-base font-poppins text-sm">
-          Immerse yourself in the rich textures and vibrant hues of our oil painting collection. Each piece is a masterpiece of artistic expression, capturing the essence of life and emotion on canvas.
+          <p className=" opacity-80  mb-10 lg:text-base md:text-base font-poppins text-sm">
+          "It's time to update your reading list with some of the latest and greatest releases in the literary world. From heart-pumping thrillers to captivating memoirs, this week's new releases offer something for everyone"
           </p>
-          <button className="bg-primary px-4 py-3 text-base font-poppins text-white font-medium uppercase rounded">
-            <Link to={'/category/Oil%20Painting'}>Explore Arts</Link>
-          </button>
+          <div className='flex items-center gap-5 rounded-lg px-2 py-2 border border-gray-500 border-opacity-30 w-[90%]'>
+          <input type="text" className='bg-transparent focus:outline-none w-full py-2 px-5' placeholder='Write Book Name'/>
+          <button className='bg-primary  text-lg font-medium px-4 py-2 rounded-lg text-white'>Search</button>
+          </div>
+</div>
+<div className='w-full'>
+  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
+  <TiltCard image={'https://blog-cdn.reedsy.com/directories/gallery/174/large_1c4ae67e28c39263ee50465cbf71c67a.jpg'} height={'450px'} width={'300px'}/>
+  
+</div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="bg-banner-3 bg-cover bg-no-repeat bg-center w-full lg:h-[600px]  md:h-[600px] h-[700px] flex flex-col justify-center lg:px-20 px-10 pt-10 items-start">
-          <h1 className="lg:text-6xl md:text-4xl text-4xl font-bold text-white lg:w-[40%] md:w-[60%] w-[90%] my-5 font-clickerScript">
-            Charcoal Sketching Collections
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+<div>
+<h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
+Featured Book This Week
           </h1>
-          <p className="text-white opacity-80 lg:w-[40%] md:w-[40%] w-[90%] mb-10 lg:text-base md:text-base font-poppins text-sm">
-          Discover the artistry of charcoal sketching in our exclusive collection. Each piece captures the raw emotion and depth of the human experience, inviting viewers to contemplate the essence of existence.
+          <p className=" opacity-80  mb-10 lg:text-base md:text-base font-poppins text-sm">
+          "It's time to update your reading list with some of the latest and greatest releases in the literary world. From heart-pumping thrillers to captivating memoirs, this week's new releases offer something for everyone"
           </p>
-          <button className="bg-primary px-4 py-3 text-base font-poppins text-white font-medium uppercase rounded">
-            <Link to={'/category/Charcoal%20Sketching'}>Explore Arts</Link>
-          </button>
+          <div className='flex items-center gap-5 rounded-lg px-2 py-2 border border-gray-500 border-opacity-30 w-[90%]'>
+          <input type="text" className='bg-transparent focus:outline-none w-full py-2 px-5' placeholder='Write Book Name'/>
+          <button className='bg-primary  text-lg font-medium px-4 py-2 rounded-lg text-white'>Search</button>
+          </div>
+</div>
+<div className='w-full'>
+  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
+  <TiltCard image={'https://i.ibb.co/4ZfVBcJ/large-b2503e20731c213e4378b46676598f7d.jpg'} height={'450px'} width={'300px'}/>
+  
+</div>
         </div>
       </SwiperSlide>
     </Swiper>
