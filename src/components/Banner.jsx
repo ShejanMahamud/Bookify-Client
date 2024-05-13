@@ -30,7 +30,7 @@ const Banner = () => {
           </div>
 </div>
 <div className='w-full'>
-  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
+  
   <TiltCard image={'https://i.ibb.co/9yR84Pd/Animation.png'} height={'450px'} width={'500px'}/>
 </div>
         </div>
@@ -63,7 +63,7 @@ New Releases This Week
 Featured Book This Week
           </h1>
           <p className=" opacity-80  mb-10 lg:text-base md:text-base font-poppins text-sm">
-          "It's time to update your reading list with some of the latest and greatest releases in the literary world. From heart-pumping thrillers to captivating memoirs, this week's new releases offer something for everyone"
+          "Explore the latest and greatest releases in the literary world. From heart-pumping thrillers to captivating memoirs, this week's new arrivals offer something for every reader."
           </p>
           <div className='flex items-center gap-5 rounded-lg px-2 py-2 border border-gray-500 border-opacity-30 w-[90%]'>
           <input type="text" className='bg-transparent focus:outline-none w-full py-2 px-5' placeholder='Write Book Name'/>

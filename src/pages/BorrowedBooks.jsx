@@ -15,8 +15,8 @@ if(isPending){
 }
 
   return (
-    <div className="font-inter w-full">
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-20 py-16">
+    <div className="font-inter w-full pb-20">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-10 py-16">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Borrowed Books</h1>
@@ -35,7 +35,7 @@ if(isPending){
 
         </div>
       </div>
-      <div className="py-10 px-20">
+      <div className=" px-20">
 
       </div>
         {
@@ -46,7 +46,7 @@ if(isPending){
           </div>
         }
       <div
-        className={`py-10 px-20 w-full grid grid-cols-2 row-auto gap-10 items-stretch`}
+        className={` px-20 w-full grid grid-cols-2 row-auto gap-10 items-stretch`}
       >
         {books && books.map((book) => <BorrowedBook key={book._id} book={book} />)}
       </div>
