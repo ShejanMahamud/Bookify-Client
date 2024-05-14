@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
 <nav className='w-full flex items-center justify-between lg:px-10 px-5 py-3 font-inter shadow-md relative'>
-    <div className='flex items-center lg:gap-3 md:gap-3 gap-2'>
+    <div onClick={()=>navigate('/')} className='flex items-center lg:gap-3 md:gap-3 gap-2 cursor-pointer'>
       <img src="https://gist.githubusercontent.com/ShejanMahamud/55027157d9ed288e0c490b8f59878179/raw/b6f06773886c4314ccd39286a026afc0549f431e/bookify.svg" alt="logo.svg" className='
       lg:w-10 md:w-10 w-8'/>
       <span className='lg:text-2xl md:text-2xl text-xl font-medium font-briem-hand'>Bookify</span>

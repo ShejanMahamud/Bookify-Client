@@ -26,8 +26,9 @@ const AddBooks = () => {
       const book_quantity = parseInt(e.target.quantity.value);
       const book_about = e.target.about.value;
       const author_email = user?.email;
+      const author_photo = e.target.author_photo.value;
     
-      const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity,author_email }
+      const book = { book_name, book_about, book_author, book_category, book_description, book_photo, book_rating, book_quantity,author_email,author_photo }
     
       try {
         const {data} = await axiosSecure.post('/books', book);
@@ -176,6 +177,17 @@ useEffect(()=>{
               className="focus:outline-none bg-transparent w-full"
             />
             <LuUser2 className="text-primary text-xl opacity-70" />
+          </label>
+          <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">
+            <input
+              type="text"
+              class="grow"
+              name="author_photo"
+              placeholder="* Author Photo URL"
+              required
+              className="focus:outline-none bg-transparent w-full"
+            />
+            <IoImageOutline className="text-primary text-xl opacity-70" />
           </label>
         </div>
       </div>
