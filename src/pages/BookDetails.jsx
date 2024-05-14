@@ -20,7 +20,7 @@ const BookDetails = () => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-
+  console.log(id)
   const { data, refetch, isPending } = useQuery({
     queryKey: ["book", id],
     queryFn: async () => {
