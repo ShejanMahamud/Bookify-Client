@@ -60,8 +60,8 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full grid grid-cols-2 row-auto items-center py-20 px-10 font-inter">
-      <div className=" w-full relative">
+    <div className="w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center py-20 lg:px-10 px-5 font-inter">
+      <div className=" w-full relative lg:inline-block hidden md:inline-block">
         <div className="w-[50%] bg-white bottom-0 right-0 rounded-lg shadow-md px-5 py-5 flex flex-col items-start gap-2 absolute">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const Register = () => {
           alt=""
         />
       </div>
-      <div className="w-[70%] mx-auto flex flex-col items-center gap-5">
+      <div className="lg:w-[70%] w-full px-5 mx-auto flex flex-col items-center gap-5">
         <div className="flex items-center gap-5 w-full justify-center">
           <NavLink
             className={({ isActive }) =>
@@ -110,7 +110,7 @@ const Register = () => {
             </button>
           </NavLink>
         </div>
-        <h1 className="text-2xl font-bold">Manage library with Bookify</h1>
+        <h1 className="text-2xl font-bold text-center">Manage library with Bookify</h1>
         <p className="text-center text-gray-600">
           Register to Bookify and find your library management solution
         </p>

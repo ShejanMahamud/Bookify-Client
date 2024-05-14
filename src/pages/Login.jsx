@@ -66,8 +66,8 @@ const handleEmailPasswordLogin = async (e) => {
 
 
   return (
-    <div className='w-full grid grid-cols-2 row-auto items-center py-20 px-10 font-inter'>
-        <div className=' w-full relative'>
+    <div className='w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center py-20 lg:px-10 md:px-10 px-5 font-inter'>
+        <div className=' w-full relative lg:inline-block md:inline-block hidden'>
             <div className='w-[50%] bg-white bottom-0 right-0 rounded-lg shadow-md px-5 py-5 flex flex-col items-start gap-2 absolute'>
             <svg xmlns="http://www.w3.org/2000/svg" width="42" height="34" viewBox="0 0 42 34" fill="none">
   <path d="M0 34V22.625C0 18.375 0.752239 14.4583 2.25672 10.875C3.76119 7.29167 6.31045 3.66667 9.90448 0L16.4239 5.125C14.3343 7.20834 12.7463 9.16667 11.6597 11C10.5731 12.8333 9.86269 14.7083 9.52836 16.625H17.5522V34H0ZM24.4478 34V22.625C24.4478 18.375 25.2 14.4583 26.7045 10.875C28.209 7.29167 30.7582 3.66667 34.3522 0L40.8716 5.125C38.7821 7.20834 37.194 9.16667 36.1075 11C35.0209 12.8333 34.3104 14.7083 33.9761 16.625H42V34H24.4478Z" fill="#F5F5F5"/>
@@ -78,7 +78,7 @@ const handleEmailPasswordLogin = async (e) => {
             </div>
             <img src="https://i.ibb.co/Nygqjgc/paper-cut-people-of-different-ages-reading-1.webp" alt="" />
         </div>
-        <div className='w-[70%] mx-auto flex flex-col items-center gap-5'>
+        <div className='lg:w-[70%] w-full px-5 mx-auto flex flex-col items-center gap-5'>
             <div className='flex items-center gap-5 w-full justify-center'>
             <NavLink
             className={({ isActive }) =>
@@ -106,7 +106,7 @@ const handleEmailPasswordLogin = async (e) => {
           </NavLink>
             </div>
             <h1 className='text-2xl font-bold'>Find your best friend</h1>
-            <div className='w-full flex items-center gap-3'>
+            <div className='w-full flex items-center gap-3 lg:flex-row md:flex-row flex-col'>
             <button onClick={handleGoogleLogin} className='w-full flex items-center gap-2 border border-[#CCCCF5] rounded-lg px-4 py-2'>
             <FcGoogle className='text-2xl'/>
             <span className='text-gray-800 font-medium'>Sign in with Google</span>
@@ -118,7 +118,7 @@ const handleEmailPasswordLogin = async (e) => {
             </div>
             <div className='flex items-center gap-3 w-full'>
                 <hr className='border border-[#CCCCF5] w-full'/>
-                <p className='w-full text-[#202430] text-sm'>Or sign up with email</p>
+                <p className='w-full text-[#202430] lg:text-sm md:text-sm text-xs text-center'>Or sign up with email</p>
                 <hr className='border border-[#CCCCF5] w-full'/>
             </div>
             <form onSubmit={handleEmailPasswordLogin} className='mt-6 w-full'>

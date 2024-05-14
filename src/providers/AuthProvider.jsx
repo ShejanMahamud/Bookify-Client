@@ -15,9 +15,9 @@ import auth from "./../config/firebase.config";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isTokenInvalid,setIsTokenInvalid] = useState(false)
 
   const googleLogin = () => {
     const googleProvider = new GoogleAuthProvider();
@@ -56,14 +56,18 @@ const AuthProvider = ({ children }) => {
       if(currentUser){
        const {data} = await axios.get(`${import.meta.env.VITE_SERVER_API}/user/${email}`,{withCredentials:true})
         await axios.post(`${import.meta.env.VITE_SERVER_API}/jwt`,{email:email,role:data?.role},{withCredentials:true})
+        setIsTokenInvalid(false)
       }else{
-        await axios.post(`${import.meta.env.VITE_SERVER_API}/logout`,{email:email},{withCredentials:true})
+       const {data} = await axios.post(`${import.meta.env.VITE_SERVER_API}/logout`,{email:email},{withCredentials:true})
+       if(data.success){
+        setIsTokenInvalid(true)
+       }
       }
     });
     return () => unSubscribe();
   }, [user]);
 
-  const authInfo = { googleLogin,user,loading,logOut,emailPasswordRegister,updateUser,emailPasswordLogin,githubLogin,setUser };
+  const authInfo = { googleLogin,user,loading,logOut,emailPasswordRegister,updateUser,emailPasswordLogin,githubLogin,setUser,isTokenInvalid };
 
   return (
     <AuthContext.Provider value={authInfo}>

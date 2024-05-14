@@ -74,7 +74,7 @@ const UpdateBooks = () => {
       onSubmit={handleUpdateBook}
       className="w-full font-poppins flex items-center flex-col"
     >
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-20 py-16">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 md:px-10 px-5 mb-20 py-16">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Update Book</h1>
@@ -85,7 +85,7 @@ const UpdateBooks = () => {
               Update correct information of books
             </p>
           </div>
-            <ul className="flex items-center gap-1 text-white text-sm">
+            <ul className="flex items-center gap-1 text-white lg:text-sm md:text-sm text-xs">
               <li>Home</li>
               <li>/</li>
               <li>Update Book</li>
@@ -151,7 +151,7 @@ const UpdateBooks = () => {
             <FaRegStar className="text-primary text-xl opacity-70" />
           </label>
 
-          <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 col-span-2">
+          <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 lg:col-span-2 md:col-span-2">
             <input
               type="text"
               class="grow"

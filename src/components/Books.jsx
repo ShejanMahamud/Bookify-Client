@@ -17,7 +17,6 @@ const Books = () => {
       getBooks()
     },[])    
 
-
   return (
     <div className='w-full my-28 font-inter flex flex-col items-center'>
               <div className="flex flex-col items-center justify-center gap-2 w-[90%] mx-auto mb-16">
@@ -31,7 +30,7 @@ const Books = () => {
         </p>
       </div>
 
-    <div className='w-full px-20 py-10 grid grid-cols-2 items-stretch row-auto gap-10'>
+    <div className='w-full lg:px-20 px-5 py-10 grid lg:grid-cols-2 grid-cols-1 items-stretch row-auto gap-10'>
     {
         books.slice(10,16).map(book => <Book key={book._id} book={book}/>)
     }

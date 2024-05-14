@@ -2,15 +2,19 @@ import { Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdTableRows } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import BookCard from "../Utils/BookCard";
 import BookListCard from "../Utils/BookListCard";
+import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllBooks = () => {
+  const navigate = useNavigate()
   const [showList, setShowList] = useState(false);
   const axiosSecure = useAxiosSecure();
   const [books, setBooks] = useState([]);
   const [isPending,setIsPending] = useState(true)
+  const {isTokenInvalid,user} = useAuth();
 
   useEffect(()=>{
     const getBooks = async () => {
@@ -30,6 +34,12 @@ const AllBooks = () => {
     setIsPending(false)
   }
 
+  useEffect(()=>{
+    if(isTokenInvalid){
+      navigate('/login')
+    }
+  },[])
+
   if(isPending){
     return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
     <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
@@ -40,7 +50,7 @@ const AllBooks = () => {
 
   return (
     <div className="font-inter w-full">
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 py-20">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 px-5 py-20">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Find Books</h1>
@@ -59,10 +69,10 @@ const AllBooks = () => {
 
         </div>
       </div>
-      <div className="py-10 px-20">
+      <div className="py-10 lg:px-20 px-5">
         <div className="flex w-full items-center justify-end">
           <div className="flex items-center gap-5">
-<button onClick={handleAvailableBook} className="px-4 py-2 rounded-md bg-primary text-white font-medium">Show Available Book</button>
+<button onClick={handleAvailableBook} className="lg:px-4 px-2 lg:text-base text-xs py-2 rounded-md bg-primary text-white font-medium">Show Available Book</button>
             <div className="border border-[#E4E5E8] px-5 py-2 rounded-lg flex items-center gap-5">
               <Tooltip title="Grid View">
               <button
@@ -85,8 +95,8 @@ const AllBooks = () => {
         </div>
       </div>
       <div
-        className={`py-10 px-20 w-full grid ${
-          showList ? "grid-cols-1" : "grid-cols-2"
+        className={`py-10 lg:px-20 px-5 w-full grid ${
+          showList ? "grid-cols-1" : "lg:grid-cols-2 md:grid-cols-2 grid-cols-1"
         } row-auto gap-10 items-stretch`}
       >
         {showList

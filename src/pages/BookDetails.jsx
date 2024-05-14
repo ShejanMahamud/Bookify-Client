@@ -36,17 +36,16 @@ const BookDetails = () => {
           `/borrowed_book/${book_name}/${user?.email}`,
           borrowedBooks
         );
-        if (!data.success) {
-          return toast.error("You Already Borrowed This Book!");
-        }
-        if (data.success && data?.res?.insertedId) {
-          toast.success("Successful Borrowed Book!");
+        if (data?.message === 'Successfully Added Book!') {
+          toast.success(data?.message);
           setOpen(false);
           setConfirmLoading(true);
           setTimeout(() => {
             setOpen(false);
             setConfirmLoading(false);
           }, 2000);
+        }else{
+          return toast.error(data?.message);
         }
       } catch (error) {
         toast.error("Something Went Wrong!");
@@ -101,7 +100,7 @@ const BookDetails = () => {
         </div>
       ) : (
         <div className="w-full font-inter">
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 py-16 mb-20">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 md:px-10 px-5 py-16 mb-20">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Book Details</h1>
@@ -122,7 +121,7 @@ const BookDetails = () => {
 
         </div>
       </div>
-          <div className="w-[90%] mx-auto grid grid-cols-2 row-auto items-start gap-20">
+          <div className="w-[90%] mx-auto grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-start gap-20">
             <div className="w-full h-full bg-banner-11 bg-no-repeat bg-center bg-cover  rounded-lg px-10 py-10 flex items-center justify-center relative group">
               <button className="flex items-center gap-3 bg-primary text-white px-2 py-2 rounded-md absolute top-0 right-0 text-sm">
                 <IoBookOutline />

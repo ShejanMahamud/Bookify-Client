@@ -3,7 +3,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
-import TiltCard from './../Utils/TiltCard';
 
 const Banner = () => {
   return (
@@ -16,7 +15,7 @@ const Banner = () => {
         className="mySwiper"
       >
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
             Find Your Best Friend
@@ -31,12 +30,12 @@ const Banner = () => {
 </div>
 <div className='w-full'>
   
-  <TiltCard image={'https://i.ibb.co/9yR84Pd/Animation.png'} height={'450px'} width={'500px'}/>
+  <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='lg:w-full md:w-full'/>
 </div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
 New Releases This Week
@@ -49,15 +48,14 @@ New Releases This Week
           <button className='bg-primary  text-lg font-medium px-4 py-2 rounded-lg text-white'>Search</button>
           </div>
 </div>
-<div className='w-full'>
-  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
-  <TiltCard image={'https://blog-cdn.reedsy.com/directories/gallery/174/large_1c4ae67e28c39263ee50465cbf71c67a.jpg'} height={'450px'} width={'300px'}/>
+<div className='w-full flex items-center  lg:justify-center md:justify-center justify-start'>
+  <img src="https://blog-cdn.reedsy.com/directories/gallery/174/large_1c4ae67e28c39263ee50465cbf71c67a.jpg" alt="" className='lg:w-80 md:w-72 w-52 rounded-lg'/>
   
 </div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid grid-cols-2 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 gap-20">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
 Featured Book This Week
@@ -70,10 +68,8 @@ Featured Book This Week
           <button className='bg-primary  text-lg font-medium px-4 py-2 rounded-lg text-white'>Search</button>
           </div>
 </div>
-<div className='w-full'>
-  {/* <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='w-[500px]'/> */}
-  <TiltCard image={'https://i.ibb.co/4ZfVBcJ/large-b2503e20731c213e4378b46676598f7d.jpg'} height={'450px'} width={'300px'}/>
-  
+<div className='w-full flex items-center  lg:justify-center md:justify-center justify-start'>
+  <img src="https://i.ibb.co/4ZfVBcJ/large-b2503e20731c213e4378b46676598f7d.jpg" alt="" className='lg:w-80 md:w-72 w-52 rounded-lg'/>
 </div>
         </div>
       </SwiperSlide>

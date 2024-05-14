@@ -16,7 +16,7 @@ if(isPending){
 
   return (
     <div className="font-inter w-full pb-20">
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full px-20 mb-10 py-16">
+      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 px-5 md:px-10 mb-10 py-16">
         <div className="flex items-center justify-between w-full ">
           <div className="flex flex-col items-start gap-2">
             <h1 className="text-primary font-medium">Borrowed Books</h1>
@@ -27,7 +27,7 @@ if(isPending){
               Manage your borrowed books easily
             </p>
           </div>
-            <ul className="flex items-center gap-1 text-white text-sm">
+            <ul className="flex items-center gap-1 text-white lg:text-sm md:text-sm text-xs">
               <li>Home</li>
               <li>/</li>
               <li>Borrowed Books</li>
@@ -46,7 +46,7 @@ if(isPending){
           </div>
         }
       <div
-        className={` px-20 w-full grid grid-cols-2 row-auto gap-10 items-stretch`}
+        className={` lg:px-20 md:px-10 px-5 w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto gap-10 items-stretch`}
       >
         {books && books.map((book) => <BorrowedBook key={book._id} book={book} />)}
       </div>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { IoIosMenu } from "react-icons/io";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
   const {user,logOut} = useAuth();
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false) 
   const navigate = useNavigate()
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
 
@@ -34,13 +36,13 @@ const Navbar = () => {
   }
 
   return (
-<nav className='w-full flex items-center justify-between px-10 py-3 font-inter shadow-md'>
-    <div className='flex items-center gap-3'>
+<nav className='w-full flex items-center justify-between lg:px-10 px-5 py-3 font-inter shadow-md relative'>
+    <div className='flex items-center lg:gap-3 md:gap-3 gap-2'>
       <img src="https://i.ibb.co/mTw52Mh/library.png" alt="logo.svg" className='
-      w-10'/>
-      <span className='text-2xl font-medium font-briem-hand'>Bookify</span>
+      lg:w-10 md:w-10 w-8'/>
+      <span className='lg:text-2xl md:text-2xl text-xl font-medium font-briem-hand'>Bookify</span>
     </div>
-    <ul className='flex items-center gap-10'>
+    <ul className={`items-center gap-10 bg-white px-10 py-5 rounded-lg z-50 ${openMenu ? 'flex flex-col absolute right-10 top-16' : 'hidden'}`}>
     <NavLink
             className={({ isActive }) =>
               isActive
@@ -91,12 +93,63 @@ const Navbar = () => {
           </NavLink>
     </ul>
 
-  <div className='flex items-center gap-5'>
+    <ul className={`items-center gap-10 lg:flex hidden`}>
+    <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+              Home
+            </li>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/all_books"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+             All Books
+            </li>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/add_books"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+              Add Books
+            </li>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/borrowed_books"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+            Borrowed Books
+            </li>
+          </NavLink>
+    </ul>
+
+  <div className='flex items-center gap-1 md:gap-5 lg:gap-5'>
   {user ? (
-          <div className="relative flex items-center gap-5">
-            <img onClick={()=>setIsOpen(!isOpen)} referrerPolicy="no-referrer" src={user?.photoURL} alt="avatar.png" className="w-10 border-2 border-primary rounded-full duration-700"/>
+          <div className="relative flex items-center gap-2 lg:gap-5">
+            <img onClick={()=>setIsOpen(!isOpen)} referrerPolicy="no-referrer" src={user?.photoURL} alt="avatar.png" className="lg:w-10 md:w-10 w-8 border-2 border-primary rounded-full duration-700"/>
             {
-              isOpen && <div className="flex flex-col gap-3 absolute top-10 right-0 bg-white px-2 py-2 rounded-lg w-80 z-50">
+              isOpen && <div className="lg:flex flex-col gap-3 absolute top-10 right-0 bg-white px-2 py-2 rounded-lg w-80 z-50 hidden">
                 <div className="flex items-center gap-3">
                 <img referrerPolicy="no-referrer" src={user?.photoURL || "https://i.ibb.co/Lxvz266/user-1.png"} alt="avatar.png" className="w-10 rounded-full"/>
                 <div className="flex flex-col">
@@ -138,7 +191,7 @@ const Navbar = () => {
             }
            <button
               onClick={handleLogout}
-              className=" px-4 py-2 font-medium rounded-md text-white bg-primary"
+              className="lg:text-base md:text-base text-xs px-4 py-2 font-medium rounded-md text-white bg-primary"
             >
               Sign Out
             </button>
@@ -148,7 +201,7 @@ const Navbar = () => {
           <div className="flex items-center gap-5">
             <button
               onClick={() => navigate("/login")}
-              className=" px-4 py-2 font-medium rounded-md text-white bg-primary"
+              className=" px-4 py-2 font-medium rounded-md text-white bg-primary lg:text-base md:text-base text-xs"
             >
               Sign In
             </button>
@@ -167,7 +220,9 @@ const Navbar = () => {
   <svg className="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
   
 </label>
+<IoIosMenu onClick={()=>setOpenMenu(!openMenu)} className='text-3xl lg:hidden md:hidden inline-block'/>
   </div>
+  
 </nav>
   )
 }
