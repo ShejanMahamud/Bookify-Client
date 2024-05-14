@@ -1,10 +1,7 @@
-import { Tooltip } from "antd";
+import { Rating } from "@smastrom/react-rating";
 import React, { useEffect, useState } from "react";
-import { BiSolidCategory } from "react-icons/bi";
-import { MdTableRows } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../Utils/BookCard";
-import BookListCard from "../Utils/BookListCard";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
@@ -12,6 +9,7 @@ const AllBooks = () => {
   const navigate = useNavigate()
   const [showList, setShowList] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const [isOpen,setIsOpen] = useState(false)
   const [books, setBooks] = useState([]);
   const [isPending,setIsPending] = useState(true)
   const {isTokenInvalid,user} = useAuth();
@@ -47,7 +45,16 @@ const AllBooks = () => {
     <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
   </div>
   }
-
+  const items = [
+    {
+      key: '1',
+      label: (
+        <a>
+          Show Available Book
+        </a>
+      ),
+    }
+  ];
   return (
     <div className="font-inter w-full">
       <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 px-5 py-20">
@@ -73,7 +80,8 @@ const AllBooks = () => {
         <div className="flex w-full items-center justify-end">
           <div className="flex items-center gap-5">
 <button onClick={handleAvailableBook} className="lg:px-4 px-2 lg:text-base text-xs py-2 rounded-md bg-primary text-white font-medium">Show Available Book</button>
-            <div className="border border-[#E4E5E8] px-5 py-2 rounded-lg flex items-center gap-5">
+
+            {/* <div className="border border-[#E4E5E8] px-5 py-2 rounded-lg flex items-center gap-5">
               <Tooltip title="Grid View">
               <button
                 onClick={() => setShowList(false)}
@@ -90,7 +98,16 @@ const AllBooks = () => {
                 <MdTableRows className={`text-2xl ${showList ? 'text-primary' : 'text-[#939AAD]'}`} />
               </button>
             </Tooltip>
-            </div>
+            </div> */}
+            <button onClick={()=>setIsOpen(!isOpen)} className="border border-primary px-4 py-2 rounded-md text-primary text-sm relative">Choose View
+            {
+              isOpen && <div className="bg-white font-medium flex flex-col px-5 py-2 items-center gap-3 absolute right-0 top-10 text-sm">
+                <button onClick={() => setShowList(true)}>Table View</button>
+                <button onClick={() => setShowList(false)}>Card View</button>
+              </div>
+            }
+            </button>
+            
           </div>
         </div>
       </div>
@@ -100,7 +117,57 @@ const AllBooks = () => {
         } row-auto gap-10 items-stretch`}
       >
         {showList
-          ? books.map((book) => <BookListCard key={book._id} book={book} />)
+          ? 
+          <div className="overflow-x-auto">
+  <table className="table">
+    <thead>
+      <tr>
+        <th>Book Details</th>
+        <th>Book About</th>
+        <th>Rating</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+          {
+            books.map(book=> (
+              <tr key={book._id}>
+              <td>
+                <div className="flex items-center gap-3">
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-16 h-16">
+                      <img src={book?.book_photo} alt="book" />
+                    </div>
+                  </div>
+                  <div className="w-full">
+                    <div className="font-bold w-full">{book?.book_name}</div>
+                    <div className="text-sm opacity-50">{book?.book_author}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div className="flex flex-col gap-2">
+                <p className="text-ellipsis overflow-hidden ...">{book?.book_description}</p>
+                <span className="badge badge-ghost badge-md">{book?.book_category}</span>
+                </div>
+              </td>
+              <td>
+              <Rating
+style={{ maxWidth: 100 }}
+value={book?.book_rating}
+readOnly
+/>
+              </td>
+              <th>
+                <button onClick={()=>navigate(`/update_book/${book?._id}`)} className="uppercase text-xs text-white px-4 py-2 rounded-md bg-primary">Update</button>
+              </th>
+            </tr>
+            ))
+          }
+    </tbody>
+    
+  </table>
+</div>
           : books.map((book) => <BookCard key={book._id} book={book} />)}
       </div>
       {/* <div className="flex items-center gap-5 py-10 px-20 w-full justify-center">
