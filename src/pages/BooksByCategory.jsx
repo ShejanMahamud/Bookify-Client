@@ -18,7 +18,7 @@ const {data} = useLoaderData();
          Explore books and find your best friends
         </p>
       </div>
-        <div className='w-[90%] mx-auto grid grid-cols-2 row-auto items-stretch gap-x-10 gap-y-5'>
+        <div className='w-[90%] mx-auto grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-stretch gap-x-10 gap-y-5'>
         {
             data.map(book => <Book key={book._id} book={book}/>)
         }

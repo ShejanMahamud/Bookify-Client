@@ -65,7 +65,7 @@ const {data} = useQuery({
       {
           data && data.map(writer => (
                 <SwiperSlide>
-                    <div key={writer._id} className='flex flex-col items-center gap-2'>
+                    <div key={writer._id} onClick={()=>navigate(`/writer_books/${writer?.writer_name}`)} className='flex flex-col items-center gap-2'>
             <div className='h-40 w-40 cursor-pointer overflow-hidden rounded-full border-2 border-primary'>
             <img src={writer?.writer_photo} alt="categories.jpg" className='w-full h-full object-cover  hover:scale-110 duration-500 hover:grayscale'/>
             </div>

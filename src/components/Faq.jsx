@@ -2,109 +2,73 @@ import React from 'react'
 
 const Faq = () => {
   return (
-    <section class="">
-    <div class="container px-6 py-12 mx-auto">
-        <h1 class="text-2xl font-semibold lg:text-3xl">Frequently asked questions.</h1>
-
-        <div class="grid grid-cols-1 gap-x-8 gap-y-10 mt-8 lg:mt-16 md:grid-cols-2 xl:grid-cols-2">
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold">What can i expect at my first consultation?</h1>
-
-                    <p class="mt-2 text-sm">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold  ">What are your opening house?</h1>
-
-                    <p class="mt-2 text-sm  ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold  ">Do i need a referral?</h1>
-
-                    <p class="mt-2 text-sm  ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold  ">Is the cost of the appoinment covered by private health insurance?</h1>
-
-                    <p class="mt-2 text-sm  ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold  ">What is your cancellation policy?</h1>
-
-                    <p class="mt-2 text-sm  ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-
-            <div>
-                <div class="inline-block p-3 text-white bg-blue-600 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-
-                <div>
-                    <h1 class="text-xl font-semibold  ">What are the parking and public transport options?</h1>
-
-                    <p class="mt-2 text-sm  ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident placeat, consequatur eveniet veritatis quos dignissimos beatae dolores exercitationem laboriosam officia magnam atque blanditiis illum doloremque magni ex corrupti tempora quis.
-                    </p>
-                </div>
-            </div>
-        </div>
+<section className="w-[90%] mx-auto my-20 grid grid-cols-1 lg:grid-cols-2 grid-rows-1 gap-5 lg:gap-16 items-center" id="faq">
+  <div>
+    <img src="https://kontho.netlify.app/assets/faq-U7xls74s-U7xls74s.png" alt="faq.png" />
+  </div>
+  <div className="*:mb-4">
+    <h1 className="text-4xl lg:text-5xl font-medium pl-3">FAQ</h1>
+    <p className="text-secondary-text font-medium text-sm pl-3">
+      You can explore some frequently asked questions about our library management web application.
+    </p>
+    <div className="collapse collapse-plus">
+      <input type="radio" name="my-accordion-3" checked="checked" />
+      <div className="collapse-title text-xl font-medium">
+        How do I register for an account?
+      </div>
+      <div className="collapse-content">
+        <p>
+          To register for an account, click on the 'Sign Up' button on the homepage, fill out the required information, and submit the form. You'll receive a confirmation email to verify your account.
+        </p>
+      </div>
     </div>
+    <div className="collapse collapse-plus">
+      <input type="radio" name="my-accordion-3" />
+      <div className="collapse-title text-xl font-medium">
+        How can I borrow books from the library?
+      </div>
+      <div className="collapse-content">
+        <p>
+          Borrowing books is easy! Simply log in to your account, search for the book you want, and click on the 'Borrow' button next to it. Make sure to check the due date for returning the book.
+        </p>
+      </div>
+    </div>
+    <div className="collapse collapse-plus">
+      <input type="radio" name="my-accordion-3" />
+      <div className="collapse-title text-xl font-medium">
+        Can I reserve a book that's currently checked out?
+      </div>
+      <div className="collapse-content">
+        <p>
+          Yes, you can! If a book you want is already checked out, you can reserve it by clicking on the 'Reserve' button. Once the book becomes available, you'll receive a notification, and it will be held for you to borrow.
+        </p>
+      </div>
+    </div>
+    <div className="collapse collapse-plus">
+      <input type="radio" name="my-accordion-3" />
+      <div className="collapse-title text-xl font-medium">
+        How can I renew my borrowed books?
+      </div>
+      <div className="collapse-content">
+        <p>
+          You can renew your borrowed books by logging in to your account, going to the 'My Borrowings' section, and selecting the option to renew next to the respective books. You can renew each book up to two times if no one else has reserved it.
+        </p>
+      </div>
+    </div>
+    <div className="collapse collapse-plus">
+      <input type="radio" name="my-accordion-3" />
+      <div className="collapse-title text-xl font-medium">
+        What should I do if I lose a library book?
+      </div>
+      <div className="collapse-content">
+        <p>
+          If you lose a library book, please report it immediately to the library staff. You may be asked to pay for the replacement cost of the book. Once paid, you'll be able to borrow books again.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
+
   )
 }
 
