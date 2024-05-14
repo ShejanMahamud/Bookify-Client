@@ -8,8 +8,7 @@ const FeaturedBook = ({book}) => {
 
 const navigate = useNavigate();
 const {book_name,book_photo,book_author,book_rating,book_description,id,book_category} = book
-console.log(book)
-console.log(id)
+
   return (
     <div className='flex lg:flex-row flex-col lg:items-end items-start gap-8 w-full rounded-md px-5 py-5'>
     <img src={book_photo} alt="book.png" className='h-[280px] w-[200px] object-cover rounded-md'/>
