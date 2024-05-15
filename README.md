@@ -6,7 +6,7 @@
 # Librarian Account
 
 ```
-email: dev@shejanmahamud@gmail.com
+email: dev.shejanmahamud@gmail.com
 password: Ihateu123@
 
 ```

@@ -126,7 +126,7 @@ const handleEmailPasswordLogin = async (e) => {
             <form onSubmit={handleEmailPasswordLogin} className='mt-6 w-full'>
             <div className='w-full'>
             <label for="email" class="block text-sm text-gray-800 ">Email Address</label>
-            <input type="email" required name="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40" />
+            <input placeholder='Enter Email Address' type="email" required name="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>
         <div className="mt-6">
             <label class="block mb-2 text-sm text-gray-600  ">Password</label>

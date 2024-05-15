@@ -329,7 +329,7 @@ const BookDetails = () => {
                 type="text"
                 name="review"
                 placeholder="Write Review"
-                className="block w-[50%] px-4 py-5 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block lg:w-[50%] md:w-[80%] w-[90%] px-4 py-5 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40"
               />
               <Rating
                 style={{ maxWidth: 120 }}
