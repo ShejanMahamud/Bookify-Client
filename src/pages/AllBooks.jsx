@@ -49,7 +49,7 @@ const AllBooks = () => {
       setLoading(false)
     }
     handleNavigate()
-  },[])
+  },[user])
 
   if(isPending || loading){
     return <div className="w-full min-h-screen flex items-center justify-center space-x-2">

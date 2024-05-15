@@ -7,9 +7,11 @@ import { IoMdBook } from "react-icons/io";
 import { IoAnalytics, IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddBooks = () => {
+  const {user} = useAuth()
   const [loading,setLoading] = useState(true)
   const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
@@ -56,7 +58,7 @@ useEffect(()=>{
     setLoading(false)
   }
   handleNavigate()
-},[])
+},[user])
 
 if(loading){
   return <div className="w-full min-h-screen flex items-center justify-center space-x-2">

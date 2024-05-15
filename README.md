@@ -29,6 +29,7 @@ password: Ihateu123@
 > - Featured Book Of this week
 > - Available Books Filtering
 > - Share review on each book
+> - Added search on banner(login required)
 
 # NPM Packages Used
 
