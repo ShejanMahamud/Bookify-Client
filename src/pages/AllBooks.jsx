@@ -1,11 +1,13 @@
 import { Rating } from "@smastrom/react-rating";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../Utils/BookCard";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllBooks = () => {
+  const [loading,setLoading] = useState(true)
   const navigate = useNavigate()
   const [showList, setShowList] = useState(false);
   const axiosSecure = useAxiosSecure();
@@ -37,8 +39,19 @@ const AllBooks = () => {
       navigate('/login')
     }
   },[])
+  useEffect(()=>{
+    const handleNavigate = async () => {
+      const {data} = await axiosSecure.get('/user_role')
+      if(!data.access){
+        toast.error('Only Librarian Can Access!')
+        return navigate(`/`)
+      }
+      setLoading(false)
+    }
+    handleNavigate()
+  },[])
 
-  if(isPending){
+  if(isPending || loading){
     return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
     <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
     <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>

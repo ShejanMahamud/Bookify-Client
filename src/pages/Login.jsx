@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaGithubAlt } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { IoIosEyeOff, IoMdEye } from 'react-icons/io';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from './../hooks/useAuth';
 
 const Login = () => {
+  const [show,setShow] = useState(false)
 const location = useLocation();
 const {googleLogin,emailPasswordLogin,githubLogin} = useAuth();
 const from = location?.state || '/'
@@ -57,7 +59,7 @@ const handleEmailPasswordLogin = async (e) => {
   }
   catch(error){
     if(error.code === 'auth/invalid-credential'){
-      toast.error(`Password Doesn't Match`);
+      toast.error(`Email/Password Doesn't Match`);
       return;
     }
     toast.error('Something Went Wrong!')
@@ -66,8 +68,8 @@ const handleEmailPasswordLogin = async (e) => {
 
 
   return (
-    <div className='w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center py-20 lg:px-10 md:px-10 px-5 font-inter'>
-        <div className=' w-full relative lg:inline-block md:inline-block hidden'>
+    <div className='w-full grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 row-auto items-center py-20 lg:px-10 md:px-10 px-5 font-inter'>
+        <div className=' w-full relative lg:inline-block md:hidden hidden'>
             <div className='w-[50%] bg-white bottom-0 right-0 rounded-lg shadow-md px-5 py-5 flex flex-col items-start gap-2 absolute'>
             <svg xmlns="http://www.w3.org/2000/svg" width="42" height="34" viewBox="0 0 42 34" fill="none">
   <path d="M0 34V22.625C0 18.375 0.752239 14.4583 2.25672 10.875C3.76119 7.29167 6.31045 3.66667 9.90448 0L16.4239 5.125C14.3343 7.20834 12.7463 9.16667 11.6597 11C10.5731 12.8333 9.86269 14.7083 9.52836 16.625H17.5522V34H0ZM24.4478 34V22.625C24.4478 18.375 25.2 14.4583 26.7045 10.875C28.209 7.29167 30.7582 3.66667 34.3522 0L40.8716 5.125C38.7821 7.20834 37.194 9.16667 36.1075 11C35.0209 12.8333 34.3104 14.7083 33.9761 16.625H42V34H24.4478Z" fill="#F5F5F5"/>
@@ -126,11 +128,29 @@ const handleEmailPasswordLogin = async (e) => {
             <label for="email" class="block text-sm text-gray-800 ">Email Address</label>
             <input type="email" required name="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>
-            <div class="mt-4">
-            <label for="password" class="block text-sm text-gray-800 ">Password</label>
-
-            <input type="password" name="password" required class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg  focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
-        </div>
+        <div className="mt-6">
+            <label class="block mb-2 text-sm text-gray-600  ">Password</label>
+            <div className="flex items-center justify-between w-full px-5 py-3 mt-2 bg-white border rounded-lg focus:border-blue-400 focus:ring-blue-400 focus:ring focus:ring-opacity-40">
+              <input
+                name="password"
+                required
+                type={show ? "text" : "password"}
+                placeholder="Enter your password"
+                class="block w-full  text-gray-700 placeholder-gray-400 focus:outline-none "
+              />
+              {show ? (
+                <IoIosEyeOff
+                  onClick={() => setShow(!show)}
+                  className="text-gray-500 cursor-pointer"
+                />
+              ) : (
+                <IoMdEye
+                  onClick={() => setShow(!show)}
+                  className="text-gray-500 cursor-pointer"
+                />
+              )}
+            </div>
+          </div>
         <div className="flex items-center gap-3 mt-6">
               <input
                 name="terms"

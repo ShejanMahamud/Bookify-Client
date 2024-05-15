@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { IoIosMenu } from "react-icons/io";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 import useAuth from '../hooks/useAuth';
-
 const Navbar = () => {
   const {user,logOut} = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +36,8 @@ const Navbar = () => {
   }
 
   return (
-<nav className='w-full flex items-center justify-between lg:px-10 px-5 py-3 font-inter shadow-md relative'>
+    <>
+    <nav className='w-full flex items-center justify-between lg:px-10 px-5 py-3 font-inter shadow-md relative'>
     <div onClick={()=>navigate('/')} className='flex items-center lg:gap-3 md:gap-3 gap-2 cursor-pointer'>
       <img src="https://gist.githubusercontent.com/ShejanMahamud/55027157d9ed288e0c490b8f59878179/raw/b6f06773886c4314ccd39286a026afc0549f431e/bookify.svg" alt="logo.svg" className='
       lg:w-10 md:w-10 w-8'/>
@@ -93,7 +94,7 @@ const Navbar = () => {
           </NavLink>
     </ul>
 
-    <ul className={`items-center gap-10 lg:flex hidden`}>
+    <ul className={`items-center lg:gap-10 md:gap-5 lg:flex md:flex  hidden`}>
     <NavLink
             className={({ isActive }) =>
               isActive
@@ -147,7 +148,7 @@ const Navbar = () => {
   <div className='flex items-center gap-1 md:gap-5 lg:gap-5'>
   {user ? (
           <div className="relative flex items-center gap-2 lg:gap-5">
-            <img onClick={()=>setIsOpen(!isOpen)} referrerPolicy="no-referrer" src={user?.photoURL} alt="avatar.png" className="lg:w-10 md:w-10 w-8 border-2 border-primary rounded-full duration-700"/>
+            <img data-tooltip-id="name" data-tooltip-content={user?.displayName} onClick={()=>setIsOpen(!isOpen)} referrerPolicy="no-referrer" src={user?.photoURL} alt="avatar.png" className="lg:w-10 md:w-10 w-8 border-2 border-primary rounded-full duration-700"/>
             {
               isOpen && <div className="lg:flex flex-col gap-3 absolute top-10 right-0 bg-white px-2 py-2 rounded-lg w-80 z-50 hidden">
                 <div className="flex items-center gap-3">
@@ -183,7 +184,7 @@ const Navbar = () => {
             </svg>
 
             <span class="mx-1">
-                Sign Out
+                Log Out
             </span>
         </button>
 
@@ -193,7 +194,7 @@ const Navbar = () => {
               onClick={handleLogout}
               className="lg:text-base md:text-base text-xs px-4 py-2 font-medium rounded-md text-white bg-primary"
             >
-              Sign Out
+              Log Out
             </button>
           </div>
           
@@ -203,7 +204,7 @@ const Navbar = () => {
               onClick={() => navigate("/login")}
               className=" px-4 py-2 font-medium rounded-md text-white bg-primary lg:text-base md:text-base text-xs"
             >
-              Sign In
+              Log In
             </button>
             
           </div>
@@ -222,8 +223,10 @@ const Navbar = () => {
 </label>
 <IoIosMenu onClick={()=>setOpenMenu(!openMenu)} className='text-3xl lg:hidden md:hidden inline-block'/>
   </div>
-  
+
 </nav>
+<Tooltip id='name'/>
+    </>
   )
 }
 

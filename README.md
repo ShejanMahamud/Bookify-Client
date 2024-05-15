@@ -28,6 +28,7 @@ password: Ihateu123@
 > - Writers Based Book
 > - Featured Book Of this week
 > - Available Books Filtering
+> - Share review on each book
 
 # NPM Packages Used
 

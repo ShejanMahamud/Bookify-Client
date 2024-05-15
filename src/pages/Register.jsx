@@ -60,8 +60,8 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center py-20 lg:px-10 px-5 font-inter">
-      <div className=" w-full relative lg:inline-block hidden md:inline-block">
+    <div className="w-full grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 row-auto items-center py-20 lg:px-10 px-5 font-inter">
+      <div className=" w-full relative lg:inline-block hidden md:hidden">
         <div className="w-[50%] bg-white bottom-0 right-0 rounded-lg shadow-md px-5 py-5 flex flex-col items-start gap-2 absolute">
           <svg
             xmlns="http://www.w3.org/2000/svg"

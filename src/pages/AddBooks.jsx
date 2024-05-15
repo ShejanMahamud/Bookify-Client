@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddBooks = () => {
+  const [loading,setLoading] = useState(true)
   const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const handleAddBook = async (e) => {
@@ -49,11 +50,21 @@ useEffect(()=>{
   const handleNavigate = async () => {
     const {data} = await axiosSecure.get('/user_role')
     if(!data.access){
+      toast.error('Only Librarian Can Access!')
       return navigate(`/`)
     }
+    setLoading(false)
   }
   handleNavigate()
 },[])
+
+if(loading){
+  return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
+  <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+  <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+  <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+</div>
+}
 
   return (
     <form

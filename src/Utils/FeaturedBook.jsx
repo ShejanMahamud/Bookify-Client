@@ -26,7 +26,13 @@ value={book_rating}
 readOnly
 />
 
-      <button onClick={()=>navigate(`/book/${id}`)}
+      <button onClick={()=>{
+            setTimeout(()=>{
+             navigate(`/book/${id}`)
+            },500);
+            window.scroll(0,0)
+         }
+          }
   className="uppercase bg-primary text-white font-bold px-4 py-2 rounded-md flex items-center gap-3 justify-center text-sm"
 >
   <span>Details</span>

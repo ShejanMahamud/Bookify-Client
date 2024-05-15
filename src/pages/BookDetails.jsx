@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { IoBookOutline } from "react-icons/io5";
 import { LuTag, LuUser2 } from "react-icons/lu";
 import { SlEnvolope } from "react-icons/sl";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import TiltCard from "../Utils/TiltCard";
@@ -15,6 +15,8 @@ import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const BookDetails = () => {
+  const navigate = useNavigate();
+  const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -36,7 +38,7 @@ const BookDetails = () => {
           `/borrowed_book/${book_name}/${user?.email}`,
           borrowedBooks
         );
-        if (data?.message === 'Successfully Added Book!') {
+        if (data?.message === "Successfully Added Book!") {
           toast.success(data?.message);
           setOpen(false);
           setConfirmLoading(true);
@@ -44,7 +46,7 @@ const BookDetails = () => {
             setOpen(false);
             setConfirmLoading(false);
           }, 2000);
-        }else{
+        } else {
           return toast.error(data?.message);
         }
       } catch (error) {
@@ -86,6 +88,28 @@ const BookDetails = () => {
     await mutateAsync({ book_name, borrowedBooks });
   };
 
+  const handleReviews = async (e) => {
+    e.preventDefault();
+    const reviewText = e.target.review.value;
+    const  review = {reviewText:reviewText,rating:rating,bookId:id,user_photo: user.photoURL};
+    const {data} = await axiosSecure.post('/reviews',review)
+    if(data.insertedId){
+      toast.success('Review Added!')
+      e.target.reset();
+      setRating(0)
+      reviewRefetch()
+    }
+    
+  }
+
+ const {data:reviews,refetch:reviewRefetch,isPending:reviewPending} = useQuery({
+    queryKey: ['reviews'],
+    queryFn: async () => {
+      const {data} = await axiosSecure.get(`/reviews?review=${id}`)
+      return data
+    }
+  })
+
   const showModal = () => {
     setOpen(true);
   };
@@ -100,34 +124,37 @@ const BookDetails = () => {
         </div>
       ) : (
         <div className="w-full font-inter">
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 md:px-10 px-5 py-16 mb-20">
-        <div className="flex items-center justify-between w-full ">
-          <div className="flex flex-col items-start gap-2">
-            <h1 className="text-primary font-medium">Book Details</h1>
-            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
-              {`Detail About Book `}
-            </span>
-            <p className=" text-sm text-white">
-              Know more about your favorite one
-            </p>
+          <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 md:px-10 px-5 py-16 mb-20">
+            <div className="flex items-center justify-between w-full ">
+              <div className="flex flex-col items-start gap-2">
+                <h1 className="text-primary font-medium">Book Details</h1>
+                <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
+                  {`Detail About Book `}
+                </span>
+                <p className=" text-sm text-white">
+                  Know more about your favorite one
+                </p>
+              </div>
+              <ul className="flex items-center gap-1 text-white text-sm">
+                <li>Home</li>
+                <li>/</li>
+                <li>{data?.book_category} Books</li>
+                <li>/</li>
+                <li>{data?.book_name}</li>
+              </ul>
+            </div>
           </div>
-            <ul className="flex items-center gap-1 text-white text-sm">
-              <li>Home</li>
-              <li>/</li>
-              <li>{data?.book_category} Books</li>
-              <li>/</li>
-              <li>{data?.book_name}</li>
-            </ul>
-
-        </div>
-      </div>
           <div className="w-[90%] mx-auto grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-start gap-20">
             <div className="w-full h-full bg-banner-11 bg-no-repeat bg-center bg-cover  rounded-lg px-10 py-10 flex items-center justify-center relative group">
               <button className="flex items-center gap-3 bg-primary text-white px-2 py-2 rounded-md absolute top-0 right-0 text-sm">
                 <IoBookOutline />
                 <span>Read Book</span>
               </button>
-              <TiltCard image={data.book_photo} width={'300px'} height={'450px'}/>
+              <TiltCard
+                image={data.book_photo}
+                width={"300px"}
+                height={"450px"}
+              />
             </div>
             <div className="flex flex-col items-start gap-5 w-full">
               <div className="flex items-center gap-3">
@@ -139,7 +166,10 @@ const BookDetails = () => {
                 </button>
               </div>
               <h1 className="text-2xl font-medium">{data?.book_name}</h1>
-              <p className="text-primary text-sm font-medium">
+              <p
+                onClick={() => navigate(`/writer_books/${data?.book_author}`)}
+                className="text-primary text-sm font-medium cursor-pointer"
+              >
                 {data?.book_author}
               </p>
               <div className="flex items-center gap-1">
@@ -291,6 +321,55 @@ const BookDetails = () => {
                 <p className="my-5">{data?.book_about}</p>
               </TabPanel>
             </Tabs>
+          </div>
+          <div className="w-[90%] mx-auto flex flex-col items-start gap-5 py-10">
+            <h1 className="font-medium text-3xl mb-5">Share Reviews</h1>
+            <form onSubmit={handleReviews} className="w-full flex items-start flex-col gap-5">
+              <input
+                type="text"
+                name="review"
+                placeholder="Write Review"
+                className="block w-[50%] px-4 py-5 mt-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-blue-300  focus:outline-none focus:ring focus:ring-opacity-40"
+              />
+              <Rating
+                style={{ maxWidth: 120 }}
+                value={rating}
+                onChange={setRating}
+              />
+              <button type="submit" className="bg-primary text-white rounded-md px-4 py-2 font-medium">
+                Submit
+              </button>
+            </form>
+            <div className="flex flex-col items-start gap-5 py-10">
+              <h1 className="font-medium text-3xl mb-3"> Reviews</h1>
+                    {
+
+                    reviewPending ? <div className=" flex items-center justify-center space-x-2">
+                    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+                    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+                    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+                  </div>
+                    : 
+                    reviews && reviews.length > 0 ? reviews.map(review => (
+                        <div key={review._id} className="flex items-center gap-3">
+                        <img
+                          src={review?.user_photo}
+                          alt=""
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+        
+                        <div className="flex flex-col items-start gap-1">
+                          <p className="w-full">
+                            {review?.reviewText}
+                          </p>
+                          <Rating style={{ maxWidth: 80 }} value={review?.rating} readOnly />
+                        </div>
+                      </div>
+                      ))
+                      :
+                      <p>No Reviews!</p>
+                    }
+            </div>
           </div>
         </div>
       )}

@@ -44,7 +44,7 @@ const handleReturnBook = async (id) => {
 
 
   return (
-    <div className='flex lg:flex-row flex-col md:flex-row lg:items-end  md:items-end items-start gap-8 w-full rounded-md px-5 py-5'>
+    <div className='flex lg:flex-row flex-col md:flex-col lg:items-end  md:items-start items-start gap-8 w-full rounded-md px-5 py-5'>
     <img src={book_photo} alt="book.png" className='h-[280px] w-[200px] object-cover rounded-md'/>
     <div className='flex flex-col items-start gap-4 justify-between'>
       <h1 className='text-xl font-medium'>{book_name}</h1>

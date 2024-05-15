@@ -34,7 +34,7 @@ const handleSearch = async (e) => {
         className="mySwiper"
       >
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
             Find Your Best Friend
@@ -73,12 +73,12 @@ const handleSearch = async (e) => {
 </div>
 <div className='w-full'>
   
-  <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='lg:w-full md:w-full'/>
+  <img src="https://i.ibb.co/9yR84Pd/Animation.png" alt="" className='lg:w-full md:w-[300px]'/>
 </div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
 New Releases This Week
@@ -97,7 +97,7 @@ New Releases This Week
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
+        <div className=" w-full lg:h-[600px]  md:h-[600px] h-[700px] grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center justify-items-end lg:px-20 px-10 pt-10 lg:gap-20 md:gap-20 gap-5">
 <div>
 <h1 className="lg:text-5xl md:text-4xl text-4xl font-bold my-5">
 Featured Book This Week

@@ -30,7 +30,7 @@ const Books = () => {
         </p>
       </div>
 
-    <div className='w-full lg:px-20 px-5 py-10 grid lg:grid-cols-2 grid-cols-1 items-stretch row-auto gap-10'>
+    <div className='w-full lg:px-20 px-5 py-10 grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-stretch row-auto gap-10'>
     {
        books && books.map(book => <FeaturedBook key={book._id} book={book}/>)
     }
