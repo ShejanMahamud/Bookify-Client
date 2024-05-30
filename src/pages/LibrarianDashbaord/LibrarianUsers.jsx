@@ -1,17 +1,49 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import Swal from 'sweetalert2'
 import useAxiosCommon from '../../hooks/useAxiosCommon'
+import { axiosSecure } from '../../hooks/useAxiosSecure'
 
 const LibrarianUsers = () => {
 
 const axiosCommon = useAxiosCommon()
-const {data:users,isPending} = useQuery({
+const {data:users,isPending,refetch} = useQuery({
     queryKey: ['users_dash'],
     queryFn: async () => {
         const {data} = await axiosCommon.get('/users?email=dev.shejanmahamud@gmail.com')
         return data
     }
 })
+
+const handleDeleteUser = async (id) => {
+  try{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const {data} = await axiosSecure.delete(`/user/${id}`);
+        if(data.deletedCount > 0){
+          Swal.fire({
+            title: "Deleted!",
+            text: "Book has been deleted.",
+            icon: "success"
+          });
+          refetch();
+        }
+      }
+    });
+    
+  }
+  catch(error){
+    toast.error('Something Went Wrong!')
+  }
+}
 
 if(isPending){
     return <div className="flex items-center justify-center space-x-2 w-full min-h-screen">
@@ -66,7 +98,7 @@ if(isPending){
         </td>
         
         <th>
-          <button className="bg-primary text-white px-2 py-1 text-xs rounded-md">Delete</button>
+          <button onClick={()=>handleDeleteUser(user?._id)} className="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
         </th>
       </tr>
         ))

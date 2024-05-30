@@ -8,7 +8,7 @@ const LibrarianDashbaord = () => {
   const {user} = useAuth()
     const {loading} = useAuth()
     const currentYear = new Date().getFullYear();
-
+    const {logOut} = useAuth()
     if(loading){
         return <div className="flex items-center justify-center space-x-2 w-full min-h-screen">
         <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
@@ -87,7 +87,7 @@ const LibrarianDashbaord = () => {
             <img src={user?.photoURL} alt="" className='w-12 h-12 rounded-full object-cover'/>
             <div className='flex flex-col items-start gap-1'>
               <h1 className='font-medium'>{user?.displayName}</h1>
-              <div className='flex items-center gap-2'>
+              <div onClick={logOut} className='flex items-center gap-2 cursor-pointer'>
               <IoLogOutOutline className='text-xl'/>
               <span className='text-sm'>LogOut</span>
               </div>

@@ -9,7 +9,7 @@ const AdminRoute = ({ children }) => {
     const {isAdmin, isAdminLoading} = useAdmin();
     const location = useLocation();
 
-    if (loading || isAdminLoading) {
+    if (loading) {
         return <div className="flex items-center justify-center space-x-2 w-full min-h-screen">
         <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
         <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>

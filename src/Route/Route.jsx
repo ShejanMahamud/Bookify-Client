@@ -66,7 +66,7 @@ const Route = createBrowserRouter([
     },
     {
       path: 'librarian/dashboard',
-      element: <LibrarianDashbaord/>,
+      element: <AdminRoute><LibrarianDashbaord/></AdminRoute>,
       children: [
         {
           path: '',

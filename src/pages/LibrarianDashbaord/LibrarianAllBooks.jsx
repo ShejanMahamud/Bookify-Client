@@ -1,12 +1,14 @@
 import { Rating } from '@smastrom/react-rating';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
+import { axiosSecure } from '../../hooks/useAxiosSecure';
 const LibrarianAllBooks = () => {
     const navigate= useNavigate()
-    // const {books,isPending} = useAllBooks()
     const axiosCommon = useAxiosCommon()
     const [itemsPerPage,setItemsPerPage] = useState(5);
     const [count,setCount] = useState(0)
@@ -15,7 +17,7 @@ const LibrarianAllBooks = () => {
 
     const pages = [...Array(numberOfPages).keys()].map(num => num  + 1)
 
-    const {data:books,isPending} = useQuery({
+    const {data:books,isPending,refetch} = useQuery({
         queryKey: ['all_books',currentPage,itemsPerPage],
         queryFn: async () => {
             const {data} = await axiosCommon.get(`/books?page=${currentPage}&size=${itemsPerPage}`)
@@ -23,6 +25,36 @@ const LibrarianAllBooks = () => {
             return data.books
         }
     })
+
+    const handleDeleteBook = async (id) => {
+      try{
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Delete it!"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const {data} = await axiosSecure.delete(`/book/${id}`);
+            if(data.deletedCount > 0){
+              Swal.fire({
+                title: "Deleted!",
+                text: "Book has been deleted.",
+                icon: "success"
+              });
+              refetch();
+            }
+          }
+        });
+        
+      }
+      catch(error){
+        toast.error('Something Went Wrong!')
+      }
+    }
 
 if(isPending){
     return <div className="flex items-center justify-center space-x-2 w-full min-h-screen">
@@ -76,9 +108,14 @@ readOnly
 />
               </td>
               <th>
+                <div className='flex items-center gap-2'>
                 <button 
                 onClick={()=>navigate(`/librarian/dashboard/update_book/${book?._id}`)}
                  className="uppercase text-xs text-white px-4 py-2 rounded-md bg-primary">Update</button>
+                 <button 
+                onClick={()=>handleDeleteBook(book?._id)}
+                 className="uppercase text-xs text-white px-4 py-2 rounded-md bg-red-500">Delete</button>
+                </div>
               </th>
             </tr>
             ))
