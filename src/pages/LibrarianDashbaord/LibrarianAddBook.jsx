@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
@@ -7,12 +7,11 @@ import { IoMdBook } from "react-icons/io";
 import { IoAnalytics, IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+
 
 const AddBooks = () => {
-  const {user} = useAuth()
-  const [loading,setLoading] = useState(true)
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const handleAddBook = async (e) => {
@@ -48,17 +47,17 @@ const AddBooks = () => {
     }
     
 
-useEffect(()=>{
-  const handleNavigate = async () => {
-    const {data} = await axiosSecure.get('/user_role')
-    if(!data.access){
-      toast.error('Only Librarian Can Access!')
-      return navigate(`/`)
-    }
-    setLoading(false)
-  }
-  handleNavigate()
-},[user])
+// useEffect(()=>{
+//   const handleNavigate = async () => {
+//     const {data} = await axiosSecure.get('/user_role')
+//     if(!data.access){
+//       toast.error('Only Librarian Can Access!')
+//       return navigate(`/`)
+//     }
+//     setLoading(false)
+//   }
+//   handleNavigate()
+// },[user])
 
 if(loading){
   return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
@@ -71,27 +70,9 @@ if(loading){
   return (
     <form
       onSubmit={handleAddBook}
-      className="w-full font-poppins flex items-center flex-col"
+      className="w-full min-h-screen border-l border-[#E4E5E8] p-10 font-poppins flex items-center flex-col"
     >
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 px-5 md:px-10 mb-20 py-16">
-        <div className="flex items-center justify-between w-full ">
-          <div className="flex flex-col items-start gap-2">
-            <h1 className="text-primary font-medium">Add Books</h1>
-            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
-              {`Add Books in Library`}
-            </span>
-            <p className=" text-sm text-white">
-              Add and manage books easily
-            </p>
-          </div>
-            <ul className="flex items-center gap-1 text-white text-sm">
-              <li>Home</li>
-              <li>/</li>
-              <li>Add Book</li>
-            </ul>
-
-        </div>
-      </div>
+ <h1 className='text-xl font-medium mb-10 text-start'>Add Book</h1>
       <div className="w-[90%] mx-auto">
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center gap-x-10 gap-y-10 my-5 ">
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">

@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import toast from "react-hot-toast";
 import { FaRegStar } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
 import { IoMdBook } from "react-icons/io";
 import { IoImageOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const UpdateBooks = () => {
+
+const LibrarianUpdateBook = () => {
   const navigate = useNavigate();
-  const { data } = useLoaderData();
   const axiosSecure = useAxiosSecure();
+  const {id} = useParams()
 
-  const {
-    book_name,
-    book_author,
-    book_category,
-    book_photo,
-    book_rating,
-    _id,
-    book_quantity
-  } = data;
+    const {data:book,isPending} = useQuery({
+        queryKey: ['single_book',id],
+        queryFn: async () => {
+            const {data} = await axiosSecure.get(`/book/${id}`)
+            return data
+        }
+    })
 
   const handleUpdateBook = async (e) => {
     e.preventDefault();
@@ -59,42 +59,31 @@ const UpdateBooks = () => {
     }
   };
 
-  useEffect(()=>{
-    const handleNavigate = async () => {
-      const {data} = await axiosSecure.get('/user_role')
-      if(!data.access){
-        return navigate(`/login`)
-      }
-    }
-    handleNavigate()
-  },[])
+//   useEffect(()=>{
+//     const handleNavigate = async () => {
+//       const {data} = await axiosSecure.get('/user_role')
+//       if(!data.access){
+//         return navigate(`/login`)
+//       }
+//     }
+//     handleNavigate()
+//   },[])
+
+if(isPending){
+    return <div className="flex items-center justify-center space-x-2 w-full min-h-screen">
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse bg-primary"></div>
+  </div>
+  }
 
   return (
     <form
       onSubmit={handleUpdateBook}
-      className="w-full font-poppins flex items-center flex-col"
+      className="w-full min-h-screen border-l border-[#E4E5E8] py-20 px-10 font-poppins flex items-center flex-col"
     >
-      <div className="bg-banner-10 bg-no-repeat bg-cover bg-center flex flex-col items-center gap-5 w-full lg:px-20 md:px-10 px-5 mb-20 py-16">
-        <div className="flex items-center justify-between w-full ">
-          <div className="flex flex-col items-start gap-2">
-            <h1 className="text-primary font-medium">Update Book</h1>
-            <span className=" font-bold lg:text-3xl md:text-xl text-lg text-white">
-              {`Update Book in Library`}
-            </span>
-            <p className=" text-sm text-white">
-              Update correct information of books
-            </p>
-          </div>
-            <ul className="flex items-center gap-1 text-white lg:text-sm md:text-sm text-xs">
-              <li>Home</li>
-              <li>/</li>
-              <li>Update Book</li>
-              <li>/</li>
-              <li>{book_name}</li>
-            </ul>
+        <h1 className='text-xl font-medium mb-10'>Update {book?.book_name}</h1>
 
-        </div>
-      </div>
       <div className="w-[90%] mx-auto">
         <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 row-auto items-center gap-x-10 gap-y-10 my-5 ">
           <label class="flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 ">
@@ -102,7 +91,7 @@ const UpdateBooks = () => {
               type="text"
               class="grow"
               name="name"
-              defaultValue={book_name}
+              defaultValue={book?.book_name}
               placeholder="* Book Name"
               required
               className="focus:outline-none bg-transparent w-full"
@@ -117,14 +106,14 @@ const UpdateBooks = () => {
               name="photo"
               placeholder="* Photo URL"
               required
-              defaultValue={book_photo}
+              defaultValue={book?.book_photo}
               className="focus:outline-none bg-transparent w-full"
             />
             <IoImageOutline className="text-primary text-xl opacity-70" />
           </label>
           <select
             name="category"
-            defaultValue={book_category}
+            defaultValue={book?.book_category}
             className="w-full flex items-center justify-between gap-2 mb-3 border border-primary border-opacity-50 focus:border-opacity-80 py-3 rounded-lg px-5 focus:outline-none bg-transparent"
           >
             <option disabled selected className="text-gray-400">
@@ -143,7 +132,7 @@ const UpdateBooks = () => {
               type="text"
               class="grow"
               name="rating"
-              defaultValue={book_rating}
+              defaultValue={book?.book_rating}
               placeholder="* Rating"
               required
               className="focus:outline-none bg-transparent w-full"
@@ -158,7 +147,7 @@ const UpdateBooks = () => {
               name="author"
               placeholder="* Author Name"
               required
-              defaultValue={book_author}
+              defaultValue={book?.book_author}
               className="focus:outline-none bg-transparent w-full"
             />
             <LuUser2 className="text-primary text-xl opacity-70" />
@@ -179,4 +168,4 @@ const UpdateBooks = () => {
   );
 };
 
-export default UpdateBooks;
+export default LibrarianUpdateBook;

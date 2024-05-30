@@ -1,55 +1,59 @@
 import { Rating } from "@smastrom/react-rating";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../Utils/BookCard";
-import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosCommon from "../hooks/useAxiosCommon";
 
 const AllBooks = () => {
-  const [loading,setLoading] = useState(true)
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate()
   const [showList, setShowList] = useState(false);
-  const axiosSecure = useAxiosSecure();
   const [isOpen,setIsOpen] = useState(false)
   const [books, setBooks] = useState([]);
   const [isPending,setIsPending] = useState(true)
-  const {isTokenInvalid,user} = useAuth();
-
+  const axiosCommon = useAxiosCommon()
+  const [itemsPerPage,setItemsPerPage] = useState(5);
+  const [count,setCount] = useState(0)
+  const numberOfPages = Math.ceil(count / itemsPerPage)
+  const [currentPage, setCurrentPage] = useState(1)
+  const pages = [...Array(numberOfPages).keys()].map(num => num  + 1)
   useEffect(()=>{
     const getBooks = async () => {
-      const {data} = await axiosSecure.get('/books')
-      setBooks(data);
+      const {data} = await axiosCommon.get(`/books?page=${currentPage}&size=${itemsPerPage}`)
+      setBooks(data.books);
+      setCount(data.count)
       setTimeout(()=>{
         setIsPending(false)
       },1000)
     }
     getBooks()
-  },[])
+  },[currentPage,itemsPerPage])
 
   const handleAvailableBook = async () => {
     setIsPending(true)
-    const {data} = await axiosSecure.get('/available_books');
-    setBooks(data)
+    const {data} = await axiosCommon.get(`/books?page=${currentPage}&size=${itemsPerPage}&available_books=true`)
+    setBooks(data.books);
+      setCount(data.count)
     setIsPending(false)
   }
 
-  useEffect(()=>{
-    if(isTokenInvalid){
-      navigate('/login')
-    }
-  },[])
-  useEffect(()=>{
-    const handleNavigate = async () => {
-      const {data} = await axiosSecure.get('/user_role')
-      if(!data.access){
-        toast.error('Only Librarian Can Access!')
-        return navigate(`/`)
-      }
-      setLoading(false)
-    }
-    handleNavigate()
-  },[user])
+  // useEffect(()=>{
+  //   if(isTokenInvalid){
+  //     navigate('/login')
+  //   }
+  // },[])
+  // useEffect(()=>{
+  //   const handleNavigate = async () => {
+  //     const {data} = await axiosSecure.get('/user_role')
+  //     if(!data.access){
+  //       toast.error('Only Librarian Can Access!')
+  //       return navigate(`/`)
+  //     }
+  //     setLoading(false)
+  //   }
+  //   handleNavigate()
+  // },[user])
 
   if(isPending || loading){
     return <div className="w-full min-h-screen flex items-center justify-center space-x-2">
@@ -172,7 +176,7 @@ readOnly
 />
               </td>
               <th>
-                <button onClick={()=>navigate(`/update_book/${book?._id}`)} className="uppercase text-xs text-white px-4 py-2 rounded-md bg-primary">Update</button>
+                <button onClick={()=>navigate(`/book/${book?._id}`)} className="uppercase text-xs text-white px-4 py-2 rounded-md bg-primary">Details</button>
               </th>
             </tr>
             ))
@@ -182,22 +186,23 @@ readOnly
   </table>
 </div>
           : books.map((book) => <BookCard key={book._id} book={book} />)}
+          
       </div>
-      {/* <div className="flex items-center gap-5 py-10 px-20 w-full justify-center">
-      <button disabled={currentPage < 2} onClick={handlePrevPage} className={`bg-[#E7F0FA] flex items-center justify-center h-10 w-10 rounded-full text-2xl ${currentPage < 2  ? 'text-[#99C2FF]' : 'text-primary'}`}>
+      <div className="flex items-center gap-5 py-10 px-20 w-full justify-center">
+      <button onClick={()=>setCurrentPage(currentPage-1)} disabled={currentPage === 1} className={` flex items-center justify-center h-10 w-10 rounded-full text-2xl ${currentPage === 1 ? 'text-[#99C2FF] bg-[#E7F0FA]' : 'bg-[#E7F0FA] text-primary'}`}>
       <IoIosArrowBack />
             </button>
          {
           pages.map(page => (
-            <button onClick={()=>setCurrentPage(page+1)} key={page+1} className={`${currentPage === page+1 ? 'bg-primary text-white' : 'bg-[#F1F2F4] text-[#5E6670]' } flex items-center justify-center h-10 w-10 rounded-full text-lg font-medium`}>
-            {page+1}
+            <button key={page} onClick={()=>setCurrentPage(page)} className={`flex items-center justify-center h-10 w-10 rounded-full text-lg font-medium ${currentPage === page ? 'bg-primary text-white ': 'bg-[#F1F2F4] text-[#5E6670]'}`}>
+            {page}
             </button>
           ))
          }
-               <button disabled={currentPage === pages.length} onClick={handleNextPage} className={`bg-[#E7F0FA] flex items-center justify-center h-10 w-10 rounded-full text-2xl ${currentPage === pages.length ? 'text-[#99C2FF]' : 'text-primary'}`}>
+               <button disabled={currentPage === numberOfPages} onClick={()=>setCurrentPage(currentPage + 1)} className={`bg-[#E7F0FA] flex items-center justify-center h-10 w-10 rounded-full text-2xl text-primary} ${currentPage === numberOfPages ? 'text-[#99C2FF] bg-[#E7F0FA]' : 'bg-[#E7F0FA] text-primary'}`}>
       <IoIosArrowForward/>
             </button>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -3,31 +3,30 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from './useAuth'
 
-const axiosSecure = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_API,
-    withCredentials: true
+
+export const axiosSecure = axios.create({
+  baseURL: import.meta.env.VITE_SERVER_API,
+  withCredentials: true,
 })
-
 const useAxiosSecure = () => {
-    const {logOut} = useAuth();
-    const navigate = useNavigate();
+  const { logOut } = useAuth()
+  const navigate = useNavigate()
+  useEffect(() => {
+    axiosSecure.interceptors.response.use(
+      res => {
+        return res
+      },
+      async error => {
+        if (error.response.status === 401 || error.response.status === 403) {
+          await logOut()
+          navigate('/login')
+        }
+        return Promise.reject(error)
+      }
+    )
+  }, [logOut, navigate])
 
-    useEffect(()=>{
-        axios.interceptors.response.use(
-            res => {
-                return res
-            },
-            async error => {
-                if(error.response.status  === 401 || error.response.status === 403){
-                    await logOut();
-                    navigate('/login')
-                }
-                return Promise.reject(error)
-            }
-        )
-    },[])
-
-   return axiosSecure; 
+  return axiosSecure
 }
 
 export default useAxiosSecure

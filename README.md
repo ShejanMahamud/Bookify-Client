@@ -1,4 +1,4 @@
-# JohuArts - Arts & Crafts Web App
+# JohuArts - Library Management Web App
 
 <p>Manage Library as Librarian & Borrowed, Return and Read Book as User</p>
 <p>Website Category: Library Management Web</p>

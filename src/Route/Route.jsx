@@ -3,17 +3,21 @@ import React from 'react';
 import {
   createBrowserRouter
 } from "react-router-dom";
+import LibrarianDashbaord from '../layout/LibrarianDashbaord';
 import Root from '../layout/Root';
-import AddBooks from '../pages/AddBooks';
+import AllBooks from '../pages/AllBooks';
 import BookDetails from '../pages/BookDetails';
 import BooksByCategory from '../pages/BooksByCategory';
 import BooksByWriter from '../pages/BooksByWriter';
 import BorrowedBooks from '../pages/BorrowedBooks';
 import Error from '../pages/Error';
+import LibrarianAddBook from '../pages/LibrarianDashbaord/LibrarianAddBook';
+import LibrarianAllBooks from '../pages/LibrarianDashbaord/LibrarianAllBooks';
+import LibrarianOverview from '../pages/LibrarianDashbaord/LibrarianOverview';
+import LibrarianUpdateBook from '../pages/LibrarianDashbaord/LibrarianUpdateBook';
+import LibrarianUsers from '../pages/LibrarianDashbaord/LibrarianUsers';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import UpdateBooks from '../pages/UpdateBook';
-import AllBooks from './../pages/AllBooks';
 import Home from './../pages/Home';
 import PrivateRoute from './PrivateRoute';
   
@@ -27,12 +31,8 @@ const Route = createBrowserRouter([
             element: <Home/>
         },
         {
-          path: '/add_books',
-          element: <PrivateRoute><AddBooks/></PrivateRoute>
-        },
-        {
           path: '/all_books',
-          element: <PrivateRoute><AllBooks/></PrivateRoute>
+          element: <AllBooks/>
         },
         {
           path: '/borrowed_books',
@@ -41,11 +41,6 @@ const Route = createBrowserRouter([
         {
           path: '/login',
           element: <Login/>
-        },
-        {
-          path: '/update_book/:id',
-          loader: ({params})=> axios.get(`${import.meta.env.VITE_SERVER_API}/book/${params.id}`),
-          element: <PrivateRoute><UpdateBooks/></PrivateRoute>
         },
         {
           path: '/books_category/:category',
@@ -64,10 +59,37 @@ const Route = createBrowserRouter([
         {
           path: '/register',
           element: <Register/>
-        }
+        },
       ],
       errorElement: <Error/>
     },
+    {
+      path: 'librarian/dashboard',
+      element: <LibrarianDashbaord/>,
+      children: [
+        {
+          path: '',
+          element: <LibrarianOverview/>
+        },
+        {
+          path: 'users',
+          element: <LibrarianUsers/>
+        },
+        {
+          path: 'all_books',
+          element: <LibrarianAllBooks/>
+        },
+        {
+          path: 'update_book/:id',
+          element: <LibrarianUpdateBook/>
+        },
+        {
+          path : 'add_book',
+          element: <LibrarianAddBook/>
+        }
+      ]
+    },
+    
   ]);
 
 export default Route
