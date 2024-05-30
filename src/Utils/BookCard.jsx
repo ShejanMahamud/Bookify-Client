@@ -36,12 +36,19 @@ value={book_rating}
 readOnly
 />
 
-      <button onClick={handleNavigate}
-  className="uppercase bg-primary text-white font-bold px-4 py-2 rounded-md flex items-center gap-3 justify-center text-sm"
->
-  <span>Update</span>
-  <GoArrowRight className="text-2xl" />
-</button>
+<button
+          onClick={()=>{
+            setTimeout(()=>{
+             navigate(`/book/${_id}`)
+            },1000);
+            window.scroll(0,0)
+         }
+          }
+          className="uppercase bg-primary text-white font-bold px-4 py-2 rounded-md flex items-center gap-3 justify-center text-sm"
+        >
+          <span>Details</span>
+          <GoArrowRight className="text-2xl" />
+        </button>
     </div>
   </div>
   )

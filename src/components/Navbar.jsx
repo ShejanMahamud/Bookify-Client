@@ -9,6 +9,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false) 
   const navigate = useNavigate()
+  const [loading,setLoading] = useState(true)
+  const [admin,setAdmin] = useState(false)
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
 
   const handleToggle = e => {
@@ -34,6 +36,19 @@ const Navbar = () => {
       toast.error('Something Went Wrong!')
     }
   }
+
+    useEffect(()=>{
+    const handleNavigate = async () => {
+      const {data} = await axiosSecure.get('/user_role')
+      if(!data.access){
+        setAdmin(true)
+        toast.error('Only Librarian Can Access!')
+        return navigate(`/`)
+      }
+      setLoading(false)
+    }
+    handleNavigate()
+  },[user])
 
   return (
     <>
@@ -68,18 +83,7 @@ const Navbar = () => {
              All Books
             </li>
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "underline decoration-primary decoration-2 underline-offset-8"
-                : "no-underline"
-            }
-            to={"/add_books"}
-          >
-            <li className=" font-medium text-sm cursor-pointer">
-              Add Books
-            </li>
-          </NavLink>
+
           <NavLink
             className={({ isActive }) =>
               isActive
@@ -92,6 +96,20 @@ const Navbar = () => {
             Borrowed Books
             </li>
           </NavLink>
+          {
+            user && admin && <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/librarian/dashboard"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+            Dashboard
+            </li>
+          </NavLink>
+          }
     </ul>
 
     <ul className={`items-center lg:gap-10 md:gap-5 lg:flex md:flex  hidden`}>
@@ -125,24 +143,26 @@ const Navbar = () => {
                 ? "underline decoration-primary decoration-2 underline-offset-8"
                 : "no-underline"
             }
-            to={"/add_books"}
-          >
-            <li className=" font-medium text-sm cursor-pointer">
-              Add Books
-            </li>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "underline decoration-primary decoration-2 underline-offset-8"
-                : "no-underline"
-            }
             to={"/borrowed_books"}
           >
             <li className=" font-medium text-sm cursor-pointer">
             Borrowed Books
             </li>
           </NavLink>
+          {
+            user && admin && <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "underline decoration-primary decoration-2 underline-offset-8"
+                : "no-underline"
+            }
+            to={"/librarian/dashboard"}
+          >
+            <li className=" font-medium text-sm cursor-pointer">
+            Dashboard
+            </li>
+          </NavLink>
+          }
     </ul>
 
   <div className='flex items-center gap-1 md:gap-5 lg:gap-5'>
