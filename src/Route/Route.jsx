@@ -19,6 +19,7 @@ import LibrarianUsers from '../pages/LibrarianDashbaord/LibrarianUsers';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Home from './../pages/Home';
+import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
   
 const Route = createBrowserRouter([
@@ -69,23 +70,23 @@ const Route = createBrowserRouter([
       children: [
         {
           path: '',
-          element: <LibrarianOverview/>
+          element:<AdminRoute><LibrarianOverview/></AdminRoute> 
         },
         {
           path: 'users',
-          element: <LibrarianUsers/>
+          element: <AdminRoute><LibrarianUsers/></AdminRoute> 
         },
         {
           path: 'all_books',
-          element: <LibrarianAllBooks/>
+          element: <AdminRoute><LibrarianAllBooks/></AdminRoute> 
         },
         {
           path: 'update_book/:id',
-          element: <LibrarianUpdateBook/>
+          element: <AdminRoute><LibrarianUpdateBook/></AdminRoute>
         },
         {
           path : 'add_book',
-          element: <LibrarianAddBook/>
+          element: <AdminRoute><LibrarianAddBook/></AdminRoute>
         }
       ]
     },

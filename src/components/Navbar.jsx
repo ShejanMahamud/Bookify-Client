@@ -3,9 +3,13 @@ import toast from 'react-hot-toast';
 import { IoIosMenu } from "react-icons/io";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
+import useAdmin from '../hooks/useAdmin';
 import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 const Navbar = () => {
   const {user,logOut} = useAuth();
+  const axiosSecure = useAxiosSecure()
+  const {isAdmin} = useAdmin()
   const [isOpen, setIsOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false) 
   const navigate = useNavigate()
@@ -36,19 +40,6 @@ const Navbar = () => {
       toast.error('Something Went Wrong!')
     }
   }
-
-    useEffect(()=>{
-    const handleNavigate = async () => {
-      const {data} = await axiosSecure.get('/user_role')
-      if(!data.access){
-        setAdmin(true)
-        toast.error('Only Librarian Can Access!')
-        return navigate(`/`)
-      }
-      setLoading(false)
-    }
-    handleNavigate()
-  },[user])
 
   return (
     <>
@@ -97,7 +88,7 @@ const Navbar = () => {
             </li>
           </NavLink>
           {
-            user && admin && <NavLink
+          isAdmin && <NavLink
             className={({ isActive }) =>
               isActive
                 ? "underline decoration-primary decoration-2 underline-offset-8"
@@ -150,7 +141,7 @@ const Navbar = () => {
             </li>
           </NavLink>
           {
-            user && admin && <NavLink
+            isAdmin && <NavLink
             className={({ isActive }) =>
               isActive
                 ? "underline decoration-primary decoration-2 underline-offset-8"
