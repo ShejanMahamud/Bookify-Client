@@ -67,4 +67,21 @@ This approach allowed efficient querying and dynamic filtering of books based on
 
 [Netlify Link](https://bookify-library.netlify.app/)
 
+# Run This Project
+
+```
+https://github.com/ShejanMahamud/NestQuest-Client.git
+```
+```
+npm instal
+```
+Dev Mode:
+```
+npm run dev
+```
+Build Mode:
+```
+npm run build
+```
+
 # Thanks For Reading & Visiting!
