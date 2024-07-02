@@ -1,6 +1,6 @@
 # Bookify - Library Management Web App
 
-<p>Manage Library as Librarian & Borrowed, Return and Read Book as User</p>
+<p>Manage library as a librarian, and borrow, return, and read books as a user.</p>
 <p>Website Category: Library Management Web</p>
 
 # Librarian Account
@@ -8,7 +8,6 @@
 ```
 email: dev.shejanmahamud@gmail.com
 password: Ihateu123@
-
 ```
 
 # Key Features
@@ -18,18 +17,18 @@ password: Ihateu123@
 > - Email Password Login & Register
 > - Private Route
 > - LogOut
-> - Only librarian can add book, update book.
-> - User can't update or add book
-> - Only librarian can manage book
-> - User can borrow a book
-> - User can return a book
-> - A user cannot borrow more than 3 books
-> - Category Based Books
-> - Writers Based Book
-> - Featured Book Of this week
-> - Available Books Filtering
-> - Share review on each book
-> - Added search on banner(login required)
+> - Only librarian can add and update books.
+> - Users cannot update or add books.
+> - Only librarian can manage books.
+> - Users can borrow a book.
+> - Users can return a book.
+> - Users cannot borrow more than 3 books.
+> - Category-based books.
+> - Writers-based books.
+> - Featured book of the week.
+> - Available books filtering.
+> - Share review on each book.
+> - Added search on banner (login required).
 
 # NPM Packages Used
 
@@ -53,6 +52,16 @@ password: Ihateu123@
 ![MongoDB](https://img.shields.io/badge/MONGODB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/NODEJS-3C873A?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+
+# Problem Faced and Solution
+
+One of the challenges faced during development was displaying books based on their categories and authors. To solve this, I leveraged MongoDB's aggregation pipeline:
+
+1. **Lookup**: Used `$lookup` to join the books collection with the categories and authors collections to get the corresponding category and author details.
+2. **Match**: Applied a `$match` stage to filter out books based on selected categories and authors.
+3. **Projection**: Used `$project` to specify the fields to be included in the final output, ensuring only relevant information is displayed.
+
+This approach allowed efficient querying and dynamic filtering of books based on user preferences, enhancing the user experience in browsing and discovering books.
 
 # Live Link
 
